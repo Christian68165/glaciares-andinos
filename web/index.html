@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>🏔 Glaciares Andinos: Deshielo y Simulación en Chacaltaya y Huayna Potosí</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header id="navbar">
+    <div class="logo">
+        <a href="index.html">Glaciares Andinos ❄️</a> 
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            
+            <li><a href="mapa.html">Mapa Interactivo 🗺</a></li> 
+            
+            <li><a href="simulacion.html">Simulación de Deshielo 🧊</a></li>
+
+            <li><a href="datos.html">Datos y Deshielo</a></li> 
+            
+            <li><a href="impacto.html">Impacto Ambiental</a></li>
+            <li><a href="proyectos.html">Proyectos</a></li>
+            
+            <li><a href="#galeria">Galería</a></li>
+            <li><a href="#conclusiones">Contacto</a></li>
+        </ul>
+    </nav>
+    <button class="menu-toggle">☰</button>
+</header>
+
+<section id="home" class="section">
+    <h1>🧊 Chacaltaya y Huayna Potosí: Desafío Andino y Transformación Glaciar</h1>
+    <p>Un proyecto interactivo para visualizar la pérdida de glaciares y el impacto ambiental en el altiplano boliviano, con foco en Chacaltaya y Huayna Potosí.</p>
+    <a href="mapa.html" class="btn">Explora el Mapa 🗺</a>
+</section>
+
+<section id="galeria" class="section">
+    <h2>📸 Galería de Fotos</h2>
+    <p>Imágenes recientes y de archivo de los glaciares andinos y el proceso de transformación del paisaje.</p>
+
+    <div class="gallery-grid">
+        
+        <img src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0005.jpg">
+        
+        <img src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0008.jpg">
+        
+        <img src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0013.jpg">
+
+        <img src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0014.jpg">
+
+        <img src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0015.jpg">
+
+        <img src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0016.jpg">
+
+        <img src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0017.jpg">
+
+        <img src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0018.jpg">
+
+        <img src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0019.jpg">
+
+        <img src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0053.jpg">
+
+        </div>
+</section>
+
+<section id="conclusiones" class="section">
+    <h2>✅ Conclusiones y Fuentes</h2>
+    <p>El impacto del deshielo es crítico para la hidrología local. Conoce más y apoya la investigación.</p>
+    <ul>
+        <li>📧 Contacto: info@proyecto.org</li>
+        <li>🔗 Enlace a fuentes de datos y estudios científicos.</li>
+    </ul>
+</section>
+
+<script>
+// SCROLL JAVASCRIPT: Mantener solo la lógica de scroll para el index
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href'); 
+        if (!targetId.startsWith('#')) return;
+        e.preventDefault(); 
+        const navbarElement = document.getElementById('navbar');
+        const navbarHeight = navbarElement ? navbarElement.offsetHeight : 0; 
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            const targetPosition = targetElement.offsetTop - navbarHeight;
+            window.scrollTo({
+                top: targetPosition, 
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+</script>
+
+</body>
+</html>
