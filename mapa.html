@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Mapa Interactivo - Chacaltaya</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.css" rel="stylesheet" />
+</head>
+<body>
+
+<header id="navbar">
+    <div class="logo">
+        <a href="index.html">Chacaltaya 🏔</a> 
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="mapa.html">Mapa Interactivo 🗺</a></li> 
+            <li><a href="simulacion.html">Simulación de Deshielo 🧊</a></li>
+            <li><a href="datos.html">Datos y Deshielo</a></li>
+            <li><a href="impacto.html">Impacto Ambiental</a></li>
+            <li><a href="proyectos.html">Proyectos</a></li>
+            <li><a href="index.html#galeria">Galería</a></li>
+            <li><a href="index.html#conclusiones">Contacto</a></li>
+        </ul>
+    </nav>
+    <button class="menu-toggle">☰</button>
+</header>
+
+<section id="mapa-interactivo">
+    
+    <div id="sidebar">
+        <h2>Mapa Interactivo</h2>
+        <p>Activa y desactiva las capas de interés. Haz click en los elementos para ver más información.</p>
+
+        <div class="legend" id="legend">
+            <h3>Capas de Datos</h3>
+            <div class="row"><input type="checkbox" id="chk_lagunas" checked><div class="swatch" style="background:#1E90FF"></div><label for="chk_lagunas">Lagunas</label></div>
+            <div class="row"><input type="checkbox" id="chk_zonas" checked><div class="swatch" style="background:#FFD700"></div><label for="chk_zonas">Zonas Turísticas</label></div>
+            <div class="row"><input type="checkbox" id="chk_pasivos" checked><div class="swatch" style="background:#8B0000"></div><label for="chk_pasivos">Pasivos Mineros</label></div>
+            <div class="row"><input type="checkbox" id="chk_areas" checked><div class="swatch" style="background:#00FF7F"></div><label for="chk_areas">Áreas Mineras</label></div>
+            <div id="legendStatus" class="loading">Cargando mapa...</div>
+        </div>
+
+        </div>
+
+    <div id="map-container">
+        <div id="map"></div>
+    </div>
+</section>
+
+<script src="map.js"></script> 
+
+</body>
+</html>
