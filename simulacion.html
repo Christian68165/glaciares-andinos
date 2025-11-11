@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simulación del Deshielo - Chacaltaya y Huayna Potosí</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet" />
 
     <style>
-        /* [Tu CSS es correcto y se mantiene igual] */
+        /* CSS ESPECÍFICO DE ESTA PÁGINA */
         body {
             margin: 0;
             padding: 0;
@@ -20,106 +21,64 @@
             color: #fff;
         }
 
-        /* Contenedor del mapa */
+        /* Contenedor del mapa: Debe ajustarse debajo del menú */
         #map {
             position: absolute;
-            top: 0;
+            /* 🛑 AJUSTADO: El mapa empieza donde termina el menú (70px) 🛑 */
+            top: 70px; 
             bottom: 0;
             width: 100%;
-            height: 100%;
+            height: calc(100% - 70px); /* Ocupa el resto de la altura */
         }
-
-        /* Panel flotante de controles */
+        
+        /* Panel flotante de controles: Debe bajar para no chocar con el menú */
         #controls {
             position: absolute;
-            top: 20px;
+            /* 🛑 AJUSTADO: Bajamos los controles para que estén debajo del menú 🛑 */
+            top: 90px; 
             left: 20px;
             background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(6px);
             padding: 16px 20px;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            z-index: 2;
+            z-index: 100; /* Alto z-index para que esté sobre el mapa */
             width: 260px;
+            /* ... (resto de estilos de #controls) ... */
         }
-
-        #controls h2 {
-            margin: 0 0 10px;
-            font-size: 18px;
-            color: #4fc3f7;
-            text-align: center;
-        }
-
-        #controls label {
-            font-size: 14px;
-            color: #ddd;
-            margin-top: 6px;
-            display: block;
-        }
-
-        #controls select,
-        #controls input[type="range"],
-        #controls button {
-            width: 100%;
-            margin-top: 4px;
-            margin-bottom: 8px;
-            border-radius: 6px;
-            border: none;
-            padding: 6px;
-        }
-
-        #controls select {
-            background: #1c1f26;
-            color: #fff;
-        }
-
-        #controls input[type="range"] {
-            accent-color: #4fc3f7;
-        }
-
-        #controls button {
-            background-color: #4fc3f7;
-            color: #000;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        #controls button:hover {
-            background-color: #81d4fa;
-        }
-
-        #yearLabel {
-            display: block;
-            text-align: center;
-            font-size: 14px;
-            font-weight: 600;
-            color: #4fc3f7;
-        }
-
-        /* Botón de volver */
+        
+        /* Botón de volver (Eliminado y reemplazado por el menú de navegación) */
         #back-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.6);
-            color: #fff;
-            border: 1px solid #4fc3f7;
-            border-radius: 8px;
-            padding: 8px 14px;
-            cursor: pointer;
-            z-index: 3;
-            transition: background 0.2s;
+            display: none; /* Ocultamos el botón de volver ya que tienes el menú */
         }
-
-        #back-btn:hover {
-            background: #4fc3f7;
-            color: #000;
-        }
+        
+        /* Aseguramos que el resto de los estilos del #controls y sus elementos se mantengan */
+        #controls h2 { margin: 0 0 10px; font-size: 18px; color: #4fc3f7; text-align: center; }
+        /* ... [continúa con el resto de tus estilos dentro de la etiqueta <style>] ... */
+        /* HE OMITIDO EL RESTO DE TUS ESTILOS EN <style> POR BREVEDAD, PERO DEBEN QUEDAR */
     </style>
 </head>
 
 <body>
+    <header id="navbar">
+        <div class="logo">
+            <a href="index.html">Glaciares Andinos 🏔️</a> 
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="mapa.html">Mapa Interactivo 🗺</a></li> 
+                <li class="active"><a href="simulacion.html">Simulación de Deshielo 🧊</a></li>
+                <li><a href="datos.html">Datos y Deshielo</a></li>
+                <li><a href="impacto.html">Impacto Ambiental</a></li>
+                <li><a href="proyectos.html">Proyectos</a></li>
+                <li><a href="index.html#galeria">Galería</a></li>
+                <li><a href="index.html#conclusiones">Contacto</a></li>
+            </ul>
+        </nav>
+        <button class="menu-toggle">☰</button>
+    </header>
+
     <div id="map"></div>
 
     <div id="controls">
@@ -139,10 +98,22 @@
         <button id="pauseBtn">⏸ Pausar</button>
     </div>
 
-    <button id="back-btn" onclick="window.location.href='index.html'">← Volver</button>
-
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
     <script src="simulacion.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('#navbar nav');
+
+            if (menuToggle && nav) {
+                menuToggle.addEventListener('click', () => {
+                    // Alterna la clase 'nav-open' en el contenedor <nav>
+                    nav.classList.toggle('nav-open');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
