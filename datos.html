@@ -54,6 +54,19 @@
             </div>
         </div>
     </section>
-
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const menuToggle = document.querySelector('.menu-toggle');
+                const nav = document.querySelector('#navbar nav');
+        
+                if (menuToggle && nav) {
+                    menuToggle.addEventListener('click', () => {
+                        // Alterna la clase 'nav-open' en el contenedor <nav>
+                        nav.classList.toggle('nav-open');
+                    });
+                }
+            });
+        </script>
     </body>
+
 </html>
