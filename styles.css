@@ -117,11 +117,11 @@ h1, h2, h3 {
 }
 
 .menu-toggle {
-    display: none; 
+    display: none; /* Oculto por defecto en escritorio */
 }
 
 /* ================================== */
-/* 4. PORTADA / HOME         */
+/* 4. PORTADA / HOME          */
 /* ================================== */
 #home {
     background: linear-gradient(rgba(30,60,114,0.7), rgba(30,60,114,0.7)), url('chacaltaya_panoramica.jpg') no-repeat center center; 
@@ -226,16 +226,62 @@ h1, h2, h3 {
 }
 
 /* ================================== */
-/* 7. RESPONSIVE             */
+/* 7. RESPONSIVE (AJUSTE DEL MENÚ MÓVIL) */
 /* ================================== */
 @media (max-width: 900px) {
     #navbar { 
         height: 60px;
         padding: 0 20px;
     }
-    #navbar nav { 
-        display: none; 
+
+    /* 🛑 INICIO: CÓDIGO AÑADIDO PARA MENÚ MÓVIL 🛑 */
+    /* 1. Habilitar el botón de hamburguesa */
+    .menu-toggle {
+        display: block; 
+        background: none;
+        border: none;
+        color: var(--color-light);
+        font-size: 1.8rem;
+        cursor: pointer;
+        z-index: 1001; 
     }
+
+    /* 2. Ocultar y posicionar el menú principal */
+    #navbar nav { 
+        /* La línea 'display: none;' ya estaba arriba, pero la redefinimos para el modo hamburguesa */
+        display: none; 
+        position: absolute;
+        top: 60px; /* Ajustado a la altura del navbar móvil */
+        left: 0;
+        width: 100%;
+        background-color: var(--color-primary); 
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* 3. Estilos del menú cuando se muestra */
+    #navbar nav ul {
+        flex-direction: column; 
+        padding: 20px 0;
+    }
+    
+    #navbar nav ul li {
+        margin: 0;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+    }
+    
+    #navbar nav ul li a {
+        display: block;
+        padding: 15px 20px;
+    }
+
+    /* 4. CLASE para mostrar el menú (activada por JavaScript) */
+    .nav-open {
+        display: block !important; 
+    }
+    /* 🛑 FIN: CÓDIGO AÑADIDO PARA MENÚ MÓVIL 🛑 */
+
+
     .section { 
         padding: 80px 5% 40px 5%; 
     }
@@ -258,24 +304,20 @@ h1, h2, h3 {
 }
 
 /* ================================== */
-/* 8. ESTILOS ESPECÍFICOS DE DATOS/POWER BI */
+/* 8. ESTILOS ESPECÍFICOS DE DATOS/POWER BI Y GALERÍA */
 /* ================================== */
 
 /* Contenedor para la inserción de Power BI */
 .powerbi-container {
     position: relative; 
     width: 100%;
-    
-    /* 🛑 AJUSTE CLAVE DE ALTURA 🛑 */
-    /* El 75% del padding-bottom hace que la altura sea 3/4 del ancho (relación 4:3).
-       Esto es más alto que el estándar 16:9 (56.25%) y hace que el reporte sea grande. */
-    padding-bottom: 75%; /* Ajusta este valor (ej. 85% para hacerlo aún más alto) */ 
-    
-    height: 0; /* Necesario para que el padding-bottom controle la altura */
+    /* Ajuste de altura para 4:3 */
+    padding-bottom: 75%; 
+    height: 0; 
     overflow: hidden; 
     margin-top: 20px;
-    box-shadow: var(--shadow-heavy); /* Usamos sombra pesada para destacarlo */
-    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: var(--shadow-heavy); 
+    border-radius: 8px; 
 }
 
 /* El Iframe ocupa el 100% del contenedor responsive */
@@ -288,6 +330,7 @@ h1, h2, h3 {
     border: none;
 }
 
+/* Galería de Fotos */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -303,5 +346,3 @@ h1, h2, h3 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     transition: transform 0.3s ease; 
 }
-
-/* ... (resto de los estilos) ... */
