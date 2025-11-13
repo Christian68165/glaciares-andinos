@@ -27,7 +27,11 @@ const GEOJSON_LAYERS = {
         color: "#4682B4", 
         tipo: "polígono"
     },
-    // Añade tus otras dos capas aquí...
+    "Ruta (Huayna Potosí - Chacaltaya)": { // El texto que aparecerá en el menú
+        url: "https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/mapas/map%20(1).geojson?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJtYXBhcy9tYXAgKDEpLmdlb2pzb24iLCJpYXQiOjE3NjMwMTMwMTYsImV4cCI6MTc5NDU0OTAxNn0.AbxjsFzWygHb2eqd0LLrdWqKy6JFCu0Q-rEqQR_F7eE", // ¡Pega la URL aquí!
+        color: "#FFFFFF", // Blanco brillante para que destaque en el mapa satelital
+        tipo: "línea"
+    },
 };
 
 // Variable para rastrear las capas GeoJSON fijas cargadas (no las vistas)
@@ -532,3 +536,4 @@ map.on('load', () => {
 });
 // -----------------------------------------------------------------------------------------
 // NOTA: El código de scroll u otros scripts de soporte deben estar fuera de map.js o ser gestionados aparte.
+
