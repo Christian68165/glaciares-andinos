@@ -240,7 +240,7 @@ h1, h2, h3 {
 .data-card {
     padding: 25px;
     border-radius: 12px;
-    /* 🛑 CORRECCIÓN CLAVE: Fondo blanco semitransparente para ver el video 🛑 */
+    /* 🛑 Fondo blanco semitransparente para ver el video detrás 🛑 */
     background-color: rgba(255, 255, 255, 0.9); 
     /* Aseguramos que el texto dentro de las tarjetas VUELVA a ser oscuro */
     color: #333; 
@@ -257,9 +257,24 @@ h1, h2, h3 {
     box-shadow: var(--shadow-heavy);
 }
 
-/* 🛑 Nuevo estilo para los contenedores de datos que pueden estar ocultando el fondo 🛑 */
+/* Contenedores de datos que deben ser transparentes */
 .data-section-container {
     background-color: transparent; 
+}
+
+/* 🛑 CORRECCIÓN FINAL: Estilo para las TABLAS de datos generadas por JS 🛑 */
+.data-table,
+.data-table thead,
+.data-table tbody,
+.data-table tr,
+.data-table td,
+.data-table th {
+    /* Fondo blanco semitransparente para ver el video a través de las tablas */
+    background-color: rgba(255, 255, 255, 0.9);
+    /* Asegurar que el color del texto sea oscuro para contraste */
+    color: #333;
+    /* Hacer el borde semitransparente o sólido si se desea */
+    border-color: rgba(0, 0, 0, 0.2); 
 }
 
 
