@@ -4,7 +4,7 @@
 :root {
     --color-primary: #1e3c72; /* Azul profundo (Andino) */
     --color-accent: #FFD700; /* Dorado/Amarillo (Resalte) */
-    --color-text: var(--color-light); /* 🛑 CORRECCIÓN 1: Texto por defecto ahora es blanco 🛑 */
+    --color-text: var(--color-light); /* Texto por defecto es blanco */
     --color-bg: #f4f4f9;
     --color-light: #ffffff;
     --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
@@ -37,11 +37,13 @@ body {
     z-index: -10; 
     /* Centra el video */
     transform: translate(-50%, -50%); 
+    /* 🛑 CORRECCIÓN CLAVE 1: Asegura que el video cubra toda el área visible 🛑 */
+    object-fit: cover;
 }
 
 h1, h2, h3 { 
     font-family: 'Montserrat', sans-serif;
-    color: var(--color-light); /* 🛑 CORRECCIÓN 2: Títulos principales a blanco 🛑 */
+    color: var(--color-light); /* Títulos principales a blanco */
 }
 
 /* Compensar el contenido para que no quede debajo del Navbar fijo */
@@ -59,7 +61,7 @@ h1, h2, h3 {
     padding-bottom: 80px;
 }
 
-/* Botones (Se mantienen igual, el color de texto del botón sigue siendo var(--color-primary) que es el azul oscuro) */
+/* Botones */
 .btn { 
     display: inline-block; 
     padding: 12px 25px; 
@@ -81,7 +83,6 @@ h1, h2, h3 {
 /* ================================== */
 /* 3. HEADER / NAVBAR (Menú Fijo) */
 /* ================================== */
-/* ... (esta sección se mantiene igual) ... */
 #navbar {
     position: sticky; 
     top: 0;
@@ -143,11 +144,11 @@ h1, h2, h3 {
 #home {
     position: relative; 
     overflow: hidden; 
-    /* Mantenemos el filtro azul oscuro (0.7) sobre el video para asegurar que el texto sea legible */
-    background: linear-gradient(rgba(30,60,114,0.7), rgba(30,60,114,0.7)); 
-    background-size: cover;
+    /* 🛑 CORRECCIÓN CLAVE 2: Eliminar el fondo azul/filtro para ver el video 🛑 */
+    /* background: linear-gradient(rgba(30,60,114,0.7), rgba(30,60,114,0.7)); <-- ELIMINADO */
+    /* background-size: cover; <-- ELIMINADO */
     
-    color: white; /* Esto ya es redundante si color del body es blanco, pero no hace daño */
+    color: white; 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -158,6 +159,7 @@ h1, h2, h3 {
 #home h1 {
     font-size: 3.8rem; 
     color: var(--color-light);
+    /* Mantener text-shadow para mejorar la legibilidad del texto blanco sobre el video */
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
     margin-bottom: 0.5rem;
 }
@@ -212,8 +214,7 @@ h1, h2, h3 {
 /* 6. SECCIONES DE CONTENIDO / DASHBOARD AREA */
 /* ================================== */
 #datos-historicos, #impacto-ambiental, #reconstruccion, #galeria, #conclusiones {
-    /* 🛑 CORRECCIÓN 3: Fondo completamente transparente 🛑 */
-    /* background-color: rgba(255, 255, 255, 0.9); <-- ELIMINADO/Comentado */
+    /* Fondo completamente transparente para ver el video */
     scroll-margin-top: 70px;
     min-height: auto; 
     /* El color del texto será BLANCO por herencia del body */
@@ -223,12 +224,11 @@ h1, h2, h3 {
     font-size: 2.5rem;
     margin-bottom: 40px;
     border-bottom: 3px solid var(--color-accent);
-    /* El color del título ahora es blanco por la corrección 2 */
+    /* El color del título es blanco por la corrección 2 */
     padding-bottom: 10px;
 }
 .section h3 {
-    /* Esto sobreescribía el blanco del body, lo cambiamos a blanco */
-    color: var(--color-light); 
+    color: var(--color-light); /* Títulos h3 a blanco */
     margin-top: 30px;
 }
 .data-grid {
@@ -242,8 +242,8 @@ h1, h2, h3 {
     border-radius: 12px;
     /* Mantenemos un fondo blanco fuerte en las TARJETAS para legibilidad de datos */
     background-color: #fcfcfc;
-    /* Aseguramos que el texto dentro de las tarjetas VUELVA a ser oscuro */
-    color: var(--color-text); 
+    /* Aseguramos que el texto dentro de las tarjetas VUELVA a ser oscuro (var(--color-text) es #fff, necesitamos re-asignar) */
+    color: #333; 
     box-shadow: var(--shadow-light);
     border-left: 5px solid var(--color-primary); 
     transition: transform 0.2s;
@@ -260,7 +260,6 @@ h1, h2, h3 {
 /* ================================== */
 /* 7. RESPONSIVE (AJUSTE DEL MENÚ MÓVIL) */
 /* ================================== */
-/* ... (esta sección se mantiene igual) ... */
 @media (max-width: 900px) {
     #navbar { 
         height: 60px;
