@@ -37,8 +37,10 @@ body {
     z-index: -10; 
     /* Centra el video */
     transform: translate(-50%, -50%); 
-    /* 🛑 CORRECCIÓN CLAVE 1: Asegura que el video cubra toda el área visible 🛑 */
-    object-fit: cover;
+    /* 🛑 CORRECCIÓN CLAVE: CAMBIAR a 'contain' para que se vea sin recortes 🛑 */
+    object-fit: contain; /* ¡Este es el cambio! */
+    /* 🛑 RECOMENDADO: Fondo negro para las barras que puedan aparecer 🛑 */
+    background-color: black; 
 }
 
 h1, h2, h3 { 
@@ -374,3 +376,4 @@ h1, h2, h3 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     transition: transform 0.3s ease; 
 }
+
