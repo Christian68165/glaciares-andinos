@@ -15,6 +15,10 @@
 </head>
 <body>
 
+<video autoplay muted loop id="video-bg-global">
+    <source src="RUTA_CORRECTA_DE_TU_VIDEO/video_chacaltaya.mp4" type="video/mp4">
+    Tu navegador no soporta el video.
+</video>
 <header id="navbar">
     <div class="logo">
         <a href="index.html">Chacaltaya 🏔</a> 
@@ -22,7 +26,7 @@
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="mapa.html">Mapa Interactivo 🗺</a></li> 
+            <li class="active"><a href="mapa.html">Mapa Interactivo 🗺</a></li> 
             <li><a href="simulacion.html">Simulación de Deshielo 🧊</a></li>
             <li><a href="datos.html">Datos y Deshielo</a></li>
             <li><a href="impacto.html">Impacto Ambiental</a></li>
@@ -40,16 +44,20 @@
         <h2>Mapa Interactivo</h2>
         <p>Activa y desactiva las capas de interés. Haz click en los elementos para ver más información.</p>
 
-        <div class="legend" id="legend">
-            <h3>Capas de Datos</h3>
-            <div class="row"><input type="checkbox" id="chk_lagunas" checked><div class="swatch" style="background:#1E90FF"></div><label for="chk_lagunas">Lagunas</label></div>
-            <div class="row"><input type="checkbox" id="chk_zonas" checked><div class="swatch" style="background:#FFD700"></div><label for="chk_zonas">Zonas Turísticas</label></div>
-            <div class="row"><input type="checkbox" id="chk_pasivos" checked><div class="swatch" style="background:#8B0000"></div><label for="chk_pasivos">Pasivos Mineros</label></div>
-            <div class="row"><input type="checkbox" id="chk_areas" checked><div class="swatch" style="background:#00FF7F"></div><label for="chk_areas">Áreas Mineras</label></div>
-            <div id="legendStatus" class="loading">Cargando mapa...</div>
+        <div id="view-controls" style="margin-bottom: 25px;">
+            <h4>Vista del Mapa</h4>
+            <button id="toggle-3d" class="btn">Cambiar a 3D</button>
         </div>
-
+        
+        <div class="legend" id="geojson-legend">
+            <h3>Capas Geoespaciales</h3>
+            <div id="layer-list-container">
+                <p class="loading">Cargando lista de capas...</p>
+            </div>
+            <div id="legendStatus" class="loading" style="margin-top: 20px;">Cargando mapa...</div>
         </div>
+        
+    </div>
 
     <div id="map-container">
         <div id="map"></div>
@@ -58,7 +66,7 @@
 
 <script src="map.js"></script> 
 
-    <script>
+<script>
     document.addEventListener('DOMContentLoaded', () => {
         const menuToggle = document.querySelector('.menu-toggle');
         const nav = document.querySelector('#navbar nav');
