@@ -18,10 +18,27 @@ body {
     margin: 0; 
     padding: 0; 
     font-family: 'Roboto', sans-serif;
-    background-color: var(--color-bg); 
+    /* 🛑 CORRECCIÓN CLAVE: El fondo del body debe ser transparente para ver el video */
+    background-color: transparent; 
     color: var(--color-text); 
     scroll-behavior: smooth; 
 }
+
+/* 🛑 AÑADIDO: Estilos para el video de fondo global (#video-bg-global en el HTML) 🛑 */
+#video-bg-global {
+    position: fixed; /* Fija el video a la ventana de visualización */
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    /* CRÍTICO: Envía el video detrás de TODO el contenido de la web */
+    z-index: -10; 
+    /* Centra el video */
+    transform: translate(-50%, -50%); 
+}
+
 h1, h2, h3 { 
     font-family: 'Montserrat', sans-serif;
     color: var(--color-primary); 
@@ -124,12 +141,10 @@ h1, h2, h3 {
 /* 4. PORTADA / HOME             */
 /* ================================== */
 #home {
-    /* 🛑 AÑADIDO: Necesario para que el video (absolute) se posicione respecto a HOME 🛑 */
     position: relative; 
-    overflow: hidden; /* Oculta cualquier borde del video */
-    
-    /* Mantenemos la imagen de fondo como FALLBACK (reserva) */
-    background: linear-gradient(rgba(30,60,114,0.7), rgba(30,60,114,0.7)), url('chacaltaya_panoramica.jpg') no-repeat center center; 
+    overflow: hidden; 
+    /* 🛑 CORRECCIÓN CLAVE: Eliminar la imagen de FALLBACK y dejar solo el filtro */
+    background: linear-gradient(rgba(30,60,114,0.7), rgba(30,60,114,0.7)); 
     background-size: cover;
     
     color: white;
@@ -140,20 +155,9 @@ h1, h2, h3 {
     text-align: center;
 }
 
-/* 🛑 AÑADIDO: Estilos para el video de fondo (#video-bg en el HTML) 🛑 */
-#video-bg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    /* CRÍTICO: Envía el video detrás del contenido de texto */
-    z-index: -1; 
-    /* Centra el video */
-    transform: translate(-50%, -50%); 
-}
+/* 🛑 CÓDIGO ELIMINADO: Eliminamos el estilo obsoleto para #video-bg, ya que ahora usamos #video-bg-global */
+/* #video-bg { ... } */
+
 
 #home h1 {
     font-size: 3.8rem; 
@@ -179,6 +183,7 @@ h1, h2, h3 {
 #sidebar {
     width: 300px; 
     padding: 30px 20px; 
+    /* Mantener fondo blanco para que el mapa y sidebar sean legibles */
     background-color: var(--color-light);
     box-shadow: 2px 0 10px rgba(0,0,0,0.15); 
     position: relative; /* Es parte del flexbox */
@@ -204,16 +209,13 @@ h1, h2, h3 {
 .legend label { flex:1; user-select:none; cursor:pointer; font-weight: 500; }
 .loading { font-size:12px; color:#666; margin-top: 15px; }
 
-/* ❌ ELIMINAR O AJUSTAR ESTO: Ya no necesitas un scroll-margin-top si quitas la clase "section" */
-#mapa-interactivo {
-    /* ... Asegúrate que el código de arriba es el que queda. */
-}
-
 /* ================================== */
 /* 6. SECCIONES DE CONTENIDO / DASHBOARD AREA */
 /* ================================== */
 #datos-historicos, #impacto-ambiental, #reconstruccion, #galeria, #conclusiones {
-    background-color: var(--color-light); 
+    /* 🛑 CORRECCIÓN CLAVE: Fondo semitransparente para ver el video fijo 🛑 */
+    /* 90% blanco (0.9) es una buena base para la legibilidad. */
+    background-color: rgba(255, 255, 255, 0.9); 
     scroll-margin-top: 70px;
     min-height: auto; 
     border-top: 1px solid #ddd;
@@ -237,6 +239,7 @@ h1, h2, h3 {
 .data-card {
     padding: 25px;
     border-radius: 12px;
+    /* Mantener un blanco fuerte dentro de la tarjeta para legibilidad */
     background-color: #fcfcfc;
     box-shadow: var(--shadow-light);
     border-left: 5px solid var(--color-primary); 
@@ -256,7 +259,7 @@ h1, h2, h3 {
         padding: 0 20px;
     }
 
-    /* 🛑 INICIO: CÓDIGO AÑADIDO PARA MENÚ MÓVIL 🛑 */
+    /* 🛑 INICIO: CÓDIGO AÑADIDO PARA MENÚ MÓVIL (Se mantiene igual, es correcto) 🛑 */
     /* 1. Habilitar el botón de hamburguesa */
     .menu-toggle {
         display: block; 
@@ -270,7 +273,6 @@ h1, h2, h3 {
 
     /* 2. Ocultar y posicionar el menú principal */
     #navbar nav { 
-        /* La línea 'display: none;' ya estaba arriba, pero la redefinimos para el modo hamburguesa */
         display: none; 
         position: absolute;
         top: 60px; /* Ajustado a la altura del navbar móvil */
@@ -352,7 +354,7 @@ h1, h2, h3 {
     border: none;
 }
 
-/* Galería de Fotos y Videos (Modificado) */
+/* Galería de Fotos y Videos */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -360,7 +362,7 @@ h1, h2, h3 {
     margin-top: 40px;
 }
 
-/* 🛑 CORRECCIÓN CLAVE: Aplica los estilos tanto a IMG como a VIDEO 🛑 */
+/* Aplica los estilos de tamaño y diseño tanto a IMG como a VIDEO */
 .gallery-grid img,
 .gallery-grid video {
     width: 100%; 
@@ -370,5 +372,3 @@ h1, h2, h3 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     transition: transform 0.3s ease; 
 }
-
-
