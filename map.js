@@ -33,6 +33,20 @@ const GEOJSON_LAYERS = {
 // Variable para rastrear las capas GeoJSON fijas cargadas (no las vistas)
 const activeGeoJSONLayers = {}; 
 
+// 🛑 CONFIGURACIÓN DE FOTOS GENÉRICAS PARA PASIVOS MINEROS
+const FOTOS_PASIVOS_GENERICAS = [
+    // ❗ IMPORTANTE: REEMPLAZA ESTAS URLs con las rutas reales de tus fotos de Supabase Storage
+    "https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/pasivos/IMG-20251113-WA0001.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJwYXNpdm9zL0lNRy0yMDI1MTExMy1XQTAwMDEuanBnIiwiaWF0IjoxNzYzMDExMzUyLCJleHAiOjE3OTQ1NDczNTJ9.u5i4QiUfqckwIbUO0Zt7-tarBPLMnYasJkIZGHme6TA", 
+    "https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/pasivos/IMG-20251113-WA0002.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJwYXNpdm9zL0lNRy0yMDI1MTExMy1XQTAwMDIuanBnIiwiaWF0IjoxNzYzMDExMzY1LCJleHAiOjE3OTQ1NDczNjV9.ajtqYDCRLUOGWLqyhXKIEjJ7z8134cKYsItPPDBQbCA", 
+    "https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/pasivos/IMG-20251113-WA0004.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJwYXNpdm9zL0lNRy0yMDI1MTExMy1XQTAwMDQuanBnIiwiaWF0IjoxNzYzMDExMzc4LCJleHAiOjE3OTQ1NDczNzh9.Jph9k3nzU1LAz26HTmM1GJ_8PVmb6tXzxRA3OzCSD3M",
+    "https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/pasivos/IMG-20251113-WA0005.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJwYXNpdm9zL0lNRy0yMDI1MTExMy1XQTAwMDUuanBnIiwiaWF0IjoxNzYzMDExMzk0LCJleHAiOjE3OTQ1NDczOTR9.KF37P-pr__eb2P88-DAyi780lMzOem2GuWRaflF7g6A", 
+    "https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/pasivos/IMG-20251113-WA0006.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJwYXNpdm9zL0lNRy0yMDI1MTExMy1XQTAwMDYuanBnIiwiaWF0IjoxNzYzMDExNDAzLCJleHAiOjE3OTQ1NDc0MDN9.e0wFVqVQQorqXJBXBl_SInoGK5zaZIF4wrj53powrSE", 
+    "https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/pasivos/IMG-20251113-WA0007.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJwYXNpdm9zL0lNRy0yMDI1MTExMy1XQTAwMDcuanBnIiwiaWF0IjoxNzYzMDExNDE2LCJleHAiOjE3OTQ1NDc0MTZ9.w6Du8WWbvTOCu6e6uDs-CVXOV9BVSe59tw21zLdx7Mw",
+    "https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/pasivos/IMG-20251113-WA0008.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJwYXNpdm9zL0lNRy0yMDI1MTExMy1XQTAwMDguanBnIiwiaWF0IjoxNzYzMDExNTEzLCJleHAiOjE3OTQ1NDc1MTN9.224jiLb-qKAQNLJWEc2zdTymxVxTjtNsc--JhoBJJPM", 
+    "https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/pasivos/1.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJwYXNpdm9zLzEuanBnIiwiaWF0IjoxNzYzMDExNTc3LCJleHAiOjE3OTQ1NDc1Nzd9.FkwQe7tqnLex1r9vi12XWVvI4WmET4WutGuY_XOYh0U", 
+];
+
+
 // Capas de Vistas de Supabase (las que ya tenías)
 const CAPAS = [
     { vista: 'vw_laguna_wgs84', idBase: 'lagunas', color: '#1E90FF', extrusionHeight: 10, is3D: true }, 
@@ -73,7 +87,89 @@ const map = new mapboxgl.Map({
 });
 
 // =================================================================
-// 🛑 NUEVA FUNCIÓN: Lógica para el control 2D/3D
+// 1. FUNCIÓN AUXILIAR PARA GENERAR EL CONTENIDO DEL POPUP (CORREGIDA)
+// =================================================================
+
+function generatePopupHTML(props, vista) {
+    const val = (property) => {
+        const value = props[property];
+        if (value === null || value === undefined || value === '') {
+            return 'N/D';
+        }
+        if (property === 'area' || property === 'extension') {
+            // Asegura que el valor sea un número antes de toFixed
+            const num = parseFloat(value);
+            return isNaN(num) ? value : `${num.toFixed(2)} km²`;
+        }
+        return value;
+    };
+    
+    // 🛑 FUNCIÓN ACTUALIZADA: Renderiza foto específica o galerías genéricas
+    const renderContent = (type, url) => {
+        if (type === 'specific' && url && typeof url === 'string' && url.trim().length > 5 && (url.startsWith('http') || url.startsWith('data:'))) {
+            // Renderiza una sola foto (ej. Zonas Turísticas)
+            return `<div style="max-height: 150px; overflow: hidden; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ddd;"><img src="${url}" alt="Foto" style="width: 100%; height: auto; display: block; object-fit: cover;"></div>`;
+        }
+        
+        if (type === 'generic_pasivos' && FOTOS_PASIVOS_GENERICAS.length > 0) {
+            // Renderiza la galería genérica (Pasivos Mineros)
+            let photoHTML = '<h5 style="margin-bottom: 5px; font-size: 0.9em;">Imágenes de Referencia:</h5><div style="display: flex; gap: 5px; overflow-x: auto; padding-bottom: 5px;">';
+            FOTOS_PASIVOS_GENERICAS.forEach(fotoUrl => {
+                photoHTML += `<img src="${fotoUrl}" alt="Pasivo Minero" style="width: 100px; height: 75px; object-fit: cover; border-radius: 4px; cursor: pointer;" onclick="window.open('${fotoUrl}', '_blank')">`;
+            });
+            photoHTML += '</div>';
+            return photoHTML;
+        }
+        return '';
+    };
+
+
+    const htmlTemplates = {
+        'vw_laguna_wgs84': `
+            ${renderContent('specific', props['foto'])}
+            <h4 style="color:#1E90FF; margin-top:0; border-bottom: 2px solid #1E90FF;">💧 Laguna: ${val('nombre')}</h4>
+            <p><strong>Sitio ID:</strong> ${val('sitio_id')}</p>
+            <p><strong>Área:</strong> ${val('area')}</p>
+            <p><strong>Tipo de Agua:</strong> ${val('tipo_agua')}</p>
+            <p><strong>Flora/Fauna:</strong> ${val('flora_fauna')}</p>
+            <p><strong>Uso Actual:</strong> ${val('uso_actual')}</p>
+        `,
+        // 🛑 PLANTILLA DE PASIVOS MINEROS MODIFICADA PARA FOTOS GENÉRICAS 🛑
+        'vw_pasivominero_wgs84': `
+            ${renderContent('generic_pasivos')}
+            <h4 style="color:#8B0000; margin-top:0; border-bottom: 2px solid #8B0000;">⚠️ Pasivo Minero</h4>
+            <p><strong>Sitio Estudio ID:</strong> ${val('idSitioEstudio')}</p>
+            <p><strong>Cantón:</strong> ${val('Canton')}</p>
+            <p><strong>Provincia:</strong> ${val('Prov')}</p>
+            <p><strong>Municipio:</strong> ${val('Municipio')}</p>
+            <p><strong>Cuenca Hidrográfica:</strong> ${val('Cuenca_Hid')}</p>
+            <p><strong>Clima:</strong> ${val('Clima')}</p>
+        `,
+        'vw_zonaturistica_wgs84': `
+            ${renderContent('specific', props['foto'])}
+            <h4 style="color:#FFD700; margin-top:0; border-bottom: 2px solid #FFD700;">🏞️ ${val('tipo')}: ${val('nombre')}</h4>
+            <p><strong>Descripción:</strong> ${val('descripcion')}</p>
+            <p><strong>Popularidad:</strong> ${val('popularidad')}</p>
+            <p><strong>Horario:</strong> ${val('horario_apertura')}</p>
+            <p><strong>Tarifa:</strong> ${val('tarifa_entrada')}</p>
+            <p><strong>Actividades:</strong> ${val('actividades')}</p>
+        `,
+        'vw_areaminera_wgs84': `
+            <h4 style="color:#00FF7F; margin-top:0; border-bottom: 2px solid #00FF7F;">⛏️ Área Minera (${val('tipo_area_')})</h4>
+            <p><strong>Actor Minero:</strong> ${val('actor_mine')}</p>
+            <p><strong>Extensión:</strong> ${val('extension')} ${val('unidad')}</p>
+            <p><strong>Fecha Inscripción:</strong> ${val('fecha_insc')}</p>
+            <p><strong>Municipio:</strong> ${val('municipio')}</p>
+            <p><strong>Provincia:</strong> ${val('provincia')}</p>
+            <p><strong>ID Estudio:</strong> ${val('idSitioEstudio')}</p>
+        `
+    };
+
+    return htmlTemplates[vista] || `<h4>Información no disponible para esta capa (${vista}).</h4>`;
+}
+
+// =================================================================
+// 🛑 NUEVA FUNCIÓN: Lógica para el control 2D/3D (Mantenida)
 // =================================================================
 
 function setupViewToggle() {
@@ -108,7 +204,7 @@ function setupViewToggle() {
 
 
 // =================================================================
-// 🛑 NUEVAS FUNCIONES: Lógica de Carga y Control para GeoJSON Fijo
+// 🛑 NUEVAS FUNCIONES: Lógica de Carga y Control para GeoJSON Fijo (Mantenida)
 // =================================================================
 
 function styleGeoJSONLayer(geomType, color, opacity = 0.7) {
@@ -240,11 +336,6 @@ function setupGeoJSONLayerControls() {
     });
 }
 
-
-// ... (El resto de las funciones son las mismas, solo se añaden los nuevos setup al load) ...
-// -----------------------------------------------------------------------------------------
-// 1. FUNCIÓN AUXILIAR PARA GENERAR EL CONTENIDO DEL POPUP
-// ... (mantenida) ...
 
 // ************ FUNCIONES DE CARGA DE DATOS ************
 async function cargarVista(vista, color, idBase, extrusionHeight) {
@@ -440,4 +531,4 @@ map.on('load', () => {
     setTimeout(() => setLegendStatus(''), 5000);
 });
 // -----------------------------------------------------------------------------------------
-// ... (El resto del código de scroll es el mismo)
+// NOTA: El código de scroll u otros scripts de soporte deben estar fuera de map.js o ser gestionados aparte.
