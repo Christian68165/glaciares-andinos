@@ -37,9 +37,9 @@ body {
     z-index: -10; 
     /* Centra el video */
     transform: translate(-50%, -50%); 
-    /* 🛑 CORRECCIÓN CLAVE: CAMBIAR a 'contain' para que se vea sin recortes 🛑 */
-    object-fit: contain; /* ¡Este es el cambio! */
-    /* 🛑 RECOMENDADO: Fondo negro para las barras que puedan aparecer 🛑 */
+    /* Usar 'contain' para que se vea completo, no recortado (sin zoom) */
+    object-fit: contain; 
+    /* Fondo negro para las posibles barras laterales (pillarboxing) */
     background-color: black; 
 }
 
@@ -146,9 +146,7 @@ h1, h2, h3 {
 #home {
     position: relative; 
     overflow: hidden; 
-    /* 🛑 CORRECCIÓN CLAVE 2: Eliminar el fondo azul/filtro para ver el video 🛑 */
-    /* background: linear-gradient(rgba(30,60,114,0.7), rgba(30,60,114,0.7)); <-- ELIMINADO */
-    /* background-size: cover; <-- ELIMINADO */
+    /* Fondo transparente para ver el video */
     
     color: white; 
     display: flex;
@@ -226,7 +224,7 @@ h1, h2, h3 {
     font-size: 2.5rem;
     margin-bottom: 40px;
     border-bottom: 3px solid var(--color-accent);
-    /* El color del título es blanco por la corrección 2 */
+    /* El color del título es blanco */
     padding-bottom: 10px;
 }
 .section h3 {
@@ -242,9 +240,9 @@ h1, h2, h3 {
 .data-card {
     padding: 25px;
     border-radius: 12px;
-    /* Mantenemos un fondo blanco fuerte en las TARJETAS para legibilidad de datos */
-    background-color: #fcfcfc;
-    /* Aseguramos que el texto dentro de las tarjetas VUELVA a ser oscuro (var(--color-text) es #fff, necesitamos re-asignar) */
+    /* 🛑 CORRECCIÓN CLAVE: Fondo blanco semitransparente para ver el video 🛑 */
+    background-color: rgba(255, 255, 255, 0.9); 
+    /* Aseguramos que el texto dentro de las tarjetas VUELVA a ser oscuro */
     color: #333; 
     box-shadow: var(--shadow-light);
     border-left: 5px solid var(--color-primary); 
@@ -258,6 +256,12 @@ h1, h2, h3 {
     transform: translateY(-5px);
     box-shadow: var(--shadow-heavy);
 }
+
+/* 🛑 Nuevo estilo para los contenedores de datos que pueden estar ocultando el fondo 🛑 */
+.data-section-container {
+    background-color: transparent; 
+}
+
 
 /* ================================== */
 /* 7. RESPONSIVE (AJUSTE DEL MENÚ MÓVIL) */
@@ -376,4 +380,3 @@ h1, h2, h3 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     transition: transform 0.3s ease; 
 }
-
