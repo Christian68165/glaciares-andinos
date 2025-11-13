@@ -4,7 +4,7 @@
 :root {
     --color-primary: #1e3c72; /* Azul profundo (Andino) */
     --color-accent: #FFD700; /* Dorado/Amarillo (Resalte) */
-    --color-text: #333;
+    --color-text: var(--color-light); /* 🛑 CORRECCIÓN 1: Texto por defecto ahora es blanco 🛑 */
     --color-bg: #f4f4f9;
     --color-light: #ffffff;
     --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
@@ -18,15 +18,15 @@ body {
     margin: 0; 
     padding: 0; 
     font-family: 'Roboto', sans-serif;
-    /* 🛑 CORRECCIÓN CLAVE: El fondo del body debe ser transparente para ver el video */
+    /* CLAVE: El fondo del body debe ser transparente para ver el video */
     background-color: transparent; 
-    color: var(--color-text); 
+    color: var(--color-text); /* Ahora usa blanco */
     scroll-behavior: smooth; 
 }
 
-/* 🛑 AÑADIDO: Estilos para el video de fondo global (#video-bg-global en el HTML) 🛑 */
+/* Estilos para el video de fondo global */
 #video-bg-global {
-    position: fixed; /* Fija el video a la ventana de visualización */
+    position: fixed; 
     top: 50%;
     left: 50%;
     min-width: 100%;
@@ -41,7 +41,7 @@ body {
 
 h1, h2, h3 { 
     font-family: 'Montserrat', sans-serif;
-    color: var(--color-primary); 
+    color: var(--color-light); /* 🛑 CORRECCIÓN 2: Títulos principales a blanco 🛑 */
 }
 
 /* Compensar el contenido para que no quede debajo del Navbar fijo */
@@ -49,7 +49,6 @@ h1, h2, h3 {
     padding: 100px 5% 40px 5%; 
     min-height: 100vh;
     box-sizing: border-box;
-    /* CLAVE: Deja 70px de espacio arriba cuando se navega a esta sección */
     scroll-margin-top: 70px; 
 }
 
@@ -60,7 +59,7 @@ h1, h2, h3 {
     padding-bottom: 80px;
 }
 
-/* Botones */
+/* Botones (Se mantienen igual, el color de texto del botón sigue siendo var(--color-primary) que es el azul oscuro) */
 .btn { 
     display: inline-block; 
     padding: 12px 25px; 
@@ -82,11 +81,12 @@ h1, h2, h3 {
 /* ================================== */
 /* 3. HEADER / NAVBAR (Menú Fijo) */
 /* ================================== */
+/* ... (esta sección se mantiene igual) ... */
 #navbar {
     position: sticky; 
     top: 0;
     width: 100%;
-    height: 70px; /* Altura de referencia */
+    height: 70px; 
     background-color: var(--color-primary);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     z-index: 1000;
@@ -134,7 +134,7 @@ h1, h2, h3 {
 }
 
 .menu-toggle {
-    display: none; /* Oculto por defecto en escritorio */
+    display: none; 
 }
 
 /* ================================== */
@@ -143,21 +143,17 @@ h1, h2, h3 {
 #home {
     position: relative; 
     overflow: hidden; 
-    /* 🛑 CORRECCIÓN CLAVE: Eliminar la imagen de FALLBACK y dejar solo el filtro */
+    /* Mantenemos el filtro azul oscuro (0.7) sobre el video para asegurar que el texto sea legible */
     background: linear-gradient(rgba(30,60,114,0.7), rgba(30,60,114,0.7)); 
     background-size: cover;
     
-    color: white;
+    color: white; /* Esto ya es redundante si color del body es blanco, pero no hace daño */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
-
-/* 🛑 CÓDIGO ELIMINADO: Eliminamos el estilo obsoleto para #video-bg, ya que ahora usamos #video-bg-global */
-/* #video-bg { ... } */
-
 
 #home h1 {
     font-size: 3.8rem; 
@@ -176,25 +172,28 @@ h1, h2, h3 {
 #mapa-interactivo {
     display: flex;
     padding: 0;
-    /* CRÍTICO: Ocupar todo el espacio debajo del navbar fijo (70px) */
     height: calc(100vh - 70px); 
-    margin-top: 70px; /* Desplaza la sección hacia abajo para que no quede debajo del navbar */
+    margin-top: 70px; 
 }
 #sidebar {
     width: 300px; 
     padding: 30px 20px; 
-    /* Mantener fondo blanco para que el mapa y sidebar sean legibles */
+    /* El sidebar necesita fondo BLANCO y texto OSCURO para la legibilidad del mapa */
     background-color: var(--color-light);
+    color: var(--color-primary); /* Texto oscuro en el sidebar */
     box-shadow: 2px 0 10px rgba(0,0,0,0.15); 
-    position: relative; /* Es parte del flexbox */
-    height: 100%; /* Ocupa la altura completa de #mapa-interactivo */
+    position: relative; 
+    height: 100%; 
     overflow-y: auto;
     z-index: 10;
+}
+#sidebar h2, #sidebar h3 {
+    color: var(--color-primary); /* Títulos oscuros en el sidebar */
 }
 #map-container {
     flex-grow: 1; 
     position: relative;
-    height: 100%; /* Ocupa la altura completa de #mapa-interactivo */
+    height: 100%; 
 }
 #map { 
     position: absolute; 
@@ -213,21 +212,23 @@ h1, h2, h3 {
 /* 6. SECCIONES DE CONTENIDO / DASHBOARD AREA */
 /* ================================== */
 #datos-historicos, #impacto-ambiental, #reconstruccion, #galeria, #conclusiones {
-    /* 🛑 CORRECCIÓN CLAVE: Fondo semitransparente para ver el video fijo 🛑 */
-    /* 90% blanco (0.9) es una buena base para la legibilidad. */
-    background-color: rgba(255, 255, 255, 0.9); 
+    /* 🛑 CORRECCIÓN 3: Fondo completamente transparente 🛑 */
+    /* background-color: rgba(255, 255, 255, 0.9); <-- ELIMINADO/Comentado */
     scroll-margin-top: 70px;
     min-height: auto; 
+    /* El color del texto será BLANCO por herencia del body */
     border-top: 1px solid #ddd;
 }
 .section h2 {
     font-size: 2.5rem;
     margin-bottom: 40px;
     border-bottom: 3px solid var(--color-accent);
+    /* El color del título ahora es blanco por la corrección 2 */
     padding-bottom: 10px;
 }
 .section h3 {
-    color: #555;
+    /* Esto sobreescribía el blanco del body, lo cambiamos a blanco */
+    color: var(--color-light); 
     margin-top: 30px;
 }
 .data-grid {
@@ -239,11 +240,17 @@ h1, h2, h3 {
 .data-card {
     padding: 25px;
     border-radius: 12px;
-    /* Mantener un blanco fuerte dentro de la tarjeta para legibilidad */
+    /* Mantenemos un fondo blanco fuerte en las TARJETAS para legibilidad de datos */
     background-color: #fcfcfc;
+    /* Aseguramos que el texto dentro de las tarjetas VUELVA a ser oscuro */
+    color: var(--color-text); 
     box-shadow: var(--shadow-light);
     border-left: 5px solid var(--color-primary); 
     transition: transform 0.2s;
+}
+/* Aseguramos que los títulos dentro de las tarjetas sean oscuros (Azul Primario) */
+.data-card h2, .data-card h3 {
+    color: var(--color-primary); 
 }
 .data-card:hover {
     transform: translateY(-5px);
@@ -253,36 +260,34 @@ h1, h2, h3 {
 /* ================================== */
 /* 7. RESPONSIVE (AJUSTE DEL MENÚ MÓVIL) */
 /* ================================== */
+/* ... (esta sección se mantiene igual) ... */
 @media (max-width: 900px) {
     #navbar { 
         height: 60px;
         padding: 0 20px;
     }
 
-    /* 🛑 INICIO: CÓDIGO AÑADIDO PARA MENÚ MÓVIL (Se mantiene igual, es correcto) 🛑 */
-    /* 1. Habilitar el botón de hamburguesa */
+    /* INICIO: CÓDIGO AÑADIDO PARA MENÚ MÓVIL */
     .menu-toggle {
         display: block; 
         background: none;
         border: none;
-        color: var(--color-light);
+        color: var(--color-light); 
         font-size: 1.8rem;
         cursor: pointer;
         z-index: 1001; 
     }
 
-    /* 2. Ocultar y posicionar el menú principal */
     #navbar nav { 
         display: none; 
         position: absolute;
-        top: 60px; /* Ajustado a la altura del navbar móvil */
+        top: 60px; 
         left: 0;
         width: 100%;
         background-color: var(--color-primary); 
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
     }
     
-    /* 3. Estilos del menú cuando se muestra */
     #navbar nav ul {
         flex-direction: column; 
         padding: 20px 0;
@@ -299,11 +304,10 @@ h1, h2, h3 {
         padding: 15px 20px;
     }
 
-    /* 4. CLASE para mostrar el menú (activada por JavaScript) */
     .nav-open {
         display: block !important; 
     }
-    /* 🛑 FIN: CÓDIGO AÑADIDO PARA MENÚ MÓVIL 🛑 */
+    /* FIN: CÓDIGO AÑADIDO PARA MENÚ MÓVIL */
 
 
     .section { 
@@ -335,7 +339,6 @@ h1, h2, h3 {
 .powerbi-container {
     position: relative; 
     width: 100%;
-    /* Ajuste de altura para 4:3 */
     padding-bottom: 75%; 
     height: 0; 
     overflow: hidden; 
