@@ -121,11 +121,17 @@ h1, h2, h3 {
 }
 
 /* ================================== */
-/* 4. PORTADA / HOME          */
+/* 4. PORTADA / HOME             */
 /* ================================== */
 #home {
+    /* 🛑 AÑADIDO: Necesario para que el video (absolute) se posicione respecto a HOME 🛑 */
+    position: relative; 
+    overflow: hidden; /* Oculta cualquier borde del video */
+    
+    /* Mantenemos la imagen de fondo como FALLBACK (reserva) */
     background: linear-gradient(rgba(30,60,114,0.7), rgba(30,60,114,0.7)), url('chacaltaya_panoramica.jpg') no-repeat center center; 
     background-size: cover;
+    
     color: white;
     display: flex;
     flex-direction: column;
@@ -133,6 +139,22 @@ h1, h2, h3 {
     align-items: center;
     text-align: center;
 }
+
+/* 🛑 AÑADIDO: Estilos para el video de fondo (#video-bg en el HTML) 🛑 */
+#video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    /* CRÍTICO: Envía el video detrás del contenido de texto */
+    z-index: -1; 
+    /* Centra el video */
+    transform: translate(-50%, -50%); 
+}
+
 #home h1 {
     font-size: 3.8rem; 
     color: var(--color-light);
@@ -346,3 +368,4 @@ h1, h2, h3 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     transition: transform 0.3s ease; 
 }
+
