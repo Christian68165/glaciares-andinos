@@ -352,7 +352,7 @@ h1, h2, h3 {
     border: none;
 }
 
-/* Galería de Fotos */
+/* Galería de Fotos y Videos (Modificado) */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -360,7 +360,9 @@ h1, h2, h3 {
     margin-top: 40px;
 }
 
-.gallery-grid img {
+/* 🛑 CORRECCIÓN CLAVE: Aplica los estilos tanto a IMG como a VIDEO 🛑 */
+.gallery-grid img,
+.gallery-grid video {
     width: 100%; 
     height: 300px; 
     object-fit: cover; 
@@ -368,4 +370,5 @@ h1, h2, h3 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     transition: transform 0.3s ease; 
 }
+
 
