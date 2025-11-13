@@ -394,5 +394,13 @@ h1, h2, h3 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     transition: transform 0.3s ease; 
 }
+/* ======================================================= */
+/* 🛑 CORRECCIÓN DE COLOR DE TEXTO EN POPUP DE MAPBOX 🛑 */
+/* Regla añadida para asegurar que el texto sea negro y legible */
+.mapboxgl-popup-content * {
+    color: #000000 !important; /* Fuerza el color negro para todo el contenido del popup */
+}
+/* ======================================================= */
+
 
 
