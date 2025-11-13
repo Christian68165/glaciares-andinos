@@ -213,45 +213,68 @@ h1, h2, h3 {
 /* ================================== */
 /* 6. SECCIONES DE CONTENIDO / DASHBOARD AREA */
 /* ================================== */
-
-/* ... (código previo) ... */
-
+#datos-historicos, #impacto-ambiental, #reconstruccion, #galeria, #conclusiones {
+    /* Fondo completamente transparente para ver el video */
+    scroll-margin-top: 70px;
+    min-height: auto; 
+    /* El color del texto será BLANCO por herencia del body */
+    border-top: 1px solid #ddd;
+}
+.section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    border-bottom: 3px solid var(--color-accent);
+    /* El color del título es blanco */
+    padding-bottom: 10px;
+}
+.section h3 {
+    color: var(--color-light); /* Títulos h3 a blanco */
+    margin-top: 30px;
+}
+.data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px;
+    margin-top: 20px;
+}
 .data-card {
     padding: 25px;
     border-radius: 12px;
-    /* 🛑 CORRECCIÓN CLAVE: HACER EL FONDO TRANSPARENTE 🛑 */
-    background-color: transparent; 
-    /* Aseguramos que el texto dentro de las tarjetas VUELVA a ser BLANCO */
-    color: var(--color-light); 
-    box-shadow: none; /* Quitamos la sombra, pues ya no hay fondo sólido */
+    /* 🛑 Fondo blanco semitransparente para ver el video detrás 🛑 */
+    background-color: rgba(255, 255, 255, 0.9); 
+    /* Aseguramos que el texto dentro de las tarjetas VUELVA a ser oscuro */
+    color: #333; 
+    box-shadow: var(--shadow-light);
     border-left: 5px solid var(--color-primary); 
     transition: transform 0.2s;
 }
-
-/* 🛑 CORRECCIÓN CLAVE: Aseguramos que los títulos dentro de las tarjetas sean BLANCOS 🛑 */
+/* Aseguramos que los títulos dentro de las tarjetas sean oscuros (Azul Primario) */
 .data-card h2, .data-card h3 {
-    color: var(--color-light); 
+    color: var(--color-primary); 
 }
 .data-card:hover {
     transform: translateY(-5px);
-    /* Puedes dejar la sombra en el hover si quieres el efecto de levantamiento, 
-       pero sin fondo será menos notorio. */
     box-shadow: var(--shadow-heavy);
 }
 
-/* 🛑 CORRECCIÓN CLAVE: Eliminar fondos en Tablas 🛑 */
+/* Contenedores de datos que deben ser transparentes */
+.data-section-container {
+    background-color: transparent; 
+}
+
+/* 🛑 CORRECCIÓN FINAL: Estilo para las TABLAS de datos generadas por JS 🛑 */
 .data-table,
 .data-table thead,
 .data-table tbody,
 .data-table tr,
 .data-table td,
 .data-table th {
-    /* Fondo completamente transparente para ver el video */
-    background-color: transparent;
-    /* Asegurar que el color del texto sea BLANCO para contraste */
-    color: var(--color-light);
-    /* Eliminar el borde de las celdas/tablas que estaban en el código anterior */
-    border-color: rgba(255, 255, 255, 0.2); 
+    /* Fondo blanco semitransparente para ver el video a través de las tablas */
+    background-color: rgba(255, 255, 255, 0.9);
+    /* Asegurar que el color del texto sea oscuro para contraste */
+    color: #333;
+    /* Hacer el borde semitransparente o sólido si se desea */
+    border-color: rgba(0, 0, 0, 0.2); 
 }
 
 /* ================================== */
@@ -371,4 +394,5 @@ h1, h2, h3 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     transition: transform 0.3s ease; 
 }
+
 
