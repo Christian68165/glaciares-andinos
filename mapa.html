@@ -49,11 +49,20 @@
             <button id="toggle-3d" class="btn">Cambiar a 3D</button>
         </div>
         
-        <div class="legend" id="geojson-legend">
-            <h3>Capas Geoespaciales</h3>
+        <div class="legend" id="vistas-legend">
+            <h3>Capas de Vistas (Supabase)</h3>
+            <div class="row"><input type="checkbox" id="chk_lagunas" checked><div class="swatch" style="background:#1E90FF"></div><label for="chk_lagunas">Lagunas</label></div>
+            <div class="row"><input type="checkbox" id="chk_zonas" checked><div class="swatch" style="background:#FFD700"></div><label for="chk_zonas">Zonas Turísticas</label></div>
+            <div class="row"><input type="checkbox" id="chk_pasivos" checked><div class="swatch" style="background:#8B0000"></div><label for="chk_pasivos">Pasivos Mineros</label></div>
+            <div class="row"><input type="checkbox" id="chk_areas" checked><div class="swatch" style="background:#00FF7F"></div><label for="chk_areas">Áreas Mineras</label></div>
+        </div>
+
+        <div class="legend" id="geojson-legend" style="margin-top: 25px;">
+            <h3>Capas GeoJSON Fijas</h3>
             <div id="layer-list-container">
-                <p class="loading">Cargando lista de capas...</p>
+                <p class="loading">Generando opciones GeoJSON...</p>
             </div>
+            
             <div id="legendStatus" class="loading" style="margin-top: 20px;">Cargando mapa...</div>
         </div>
         
@@ -82,3 +91,4 @@
 </body>
 
 </html>
+
