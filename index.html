@@ -1,34 +1,207 @@
-/* ESTO DEBE AÑADIRSE AL FINAL DE styles.css */
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>🏔 ANÁLISIS GEOESPACIAL Y AMBIENTAL DEL RETROCESO GLACIAR EN CHACALTAYA Y HUAYNA POTOSÍ MEDIANTE SIG</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
 
-/* 1. Ocultar el video (seguro) */
-#video-bg-global { display: none !important; }
+    <style>
+        /* 1. Resetear el video (por si aún queda CSS del video) */
+        #video-bg-global { display: none; } 
 
-/* 2. Fondo de Imagen para la Sección Principal */
-#home {
-    /* Fondo semi-oscuro para mejor visibilidad del texto */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), 
-                      url('https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0013.jpg'); 
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed; /* Efecto Parallax fijo */
-    color: white; /* Color de texto */
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-}
+        /* 2. Estilo para el fondo de imagen fijo y bonito */
+        #home {
+            /* Usamos una de tus propias imágenes */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0013.jpg'); 
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed; /* Mantiene la imagen fija al hacer scroll */
+            color: white; /* Asegura que el texto principal sea visible */
+            min-height: 100vh; /* Asegura que ocupe toda la pantalla */
+            display: flex; /* Centrado de contenido */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
 
-/* 3. Estilo para el texto principal sobre el fondo oscuro */
-#home h1, #home p {
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* Sombra para que el texto resalte */
-}
+        /* 3. Asegurar que el resto de las secciones tenga un fondo visible */
+        body {
+            background-color: #f0f0f0; /* Fondo base claro */
+        }
+        .section {
+            padding: 40px 20px;
+            background-color: white;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+        <header id="navbar">
+            <div class="logo">
+        <a href="index.html">Glaciares Andinos ❄️</a> 
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            
+            <li><a href="mapa.html">Mapa Interactivo 🗺</a></li> 
+            
+            <li><a href="simulacion.html">Simulación de Deshielo 🧊</a></li>
 
-/* 4. Asegurar que las secciones siguientes tengan fondo blanco */
-.section {
-    padding: 40px 20px;
-    background-color: white;
-    margin-top: 10px;
-}
+            <li><a href="datos.html">Datos y Deshielo</a></li> 
+            
+            <li><a href="impacto.html">Impacto Ambiental</a></li>
+            <li><a href="proyectos.html">Proyectos</a></li>
+            
+            <li><a href="#galeria">Galería</a></li>
+            
+        </ul>
+    </nav>
+    <button class="menu-toggle">☰</button>
+</header>
+
+
+<section id="home" class="section">
+        <h1 style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">🧊 ANÁLISIS GEOESPACIAL Y AMBIENTAL DEL RETROCESO GLACIAR EN CHACALTAYA Y HUAYNA POTOSÍ MEDIANTE SIG</h1>
+    <p style="text-shadow: 1px 1px 3px rgba(0,0,0,0.8); font-size: 1.2em;">Un proyecto interactivo para visualizar la pérdida de glaciares y el impacto ambiental en el altiplano boliviano, con foco en Chacaltaya y Huayna Potosí.</p>
+    <a href="mapa.html" class="btn">Explora el Mapa 🗺</a>
+</section>
+<section id="galeria" class="section">
+    <h2>📸 Galería de Fotos y Videos</h2>
+        <p>Imágenes recientes y de archivo de los glaciares andinos y el proceso de transformación del paisaje.</p>
+
+    <div class="gallery-grid">
+
+        <div>
+            <video controls muted loop preload="metadata" 
+                   src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/videos%20huayna%20potosi/13704839_3840_2160_60fps.mp4?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ2aWRlb3MgaHVheW5hIHBvdG9zaS8xMzcwNDgzOV8zODQwXzIxNjBfNjBmcHMubXA0IiwiaWF0IjoxNzYzMDAzMDM3LCJleHAiOjE3OTQ1MzkwMzd9.GhAXwSshoHeipp900KKN93-2qVoDGxdyyaQR9aU69jY" 
+                   class="gallery-media">
+                Tu navegador no soporta el video.
+            </video>
+        </div>
+        
+        <div>
+            <video controls muted loop preload="metadata" 
+                   src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/videos%20huayna%20potosi/13704845_3840_2160_60fps.mp4?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ2aWRlb3MgaHVheW5hIHBvdG9zaS8xMzcwNDg0NV8zODQwXzIxNjBfNjBmcHMubXA0IiwiaWF0IjoxNzYzMDAzMDg0LCJleHAiOjE3OTQ1MzkwODR9.BNGVuCb24R5ubW-n8L4TALQXglLvvYOqEeVo9HvCJFE" 
+                   class="gallery-media">
+                Tu navegador no soporta el video.
+            </video>
+        </div>
+
+        <div>
+            <video controls muted loop preload="metadata" 
+                   src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/videos%20huayna%20potosi/13733128_3840_2160_60fps.mp4?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ2aWRlb3MgaHVheW5hIHBvdG9zaS8xMzczMzEyOF8zODQwXzIxNjBfNjBmcHMubXA0IiwiaWF0IjoxNzYzMDAzMDk0LCJleHAiOjE3OTQ1MzkwOTR9.wEaIjftFJkB0K1zzIuzBHM4B4-EeSmxtiUjijWVkI1A" 
+                   class="gallery-media">
+                Tu navegador no soporta el video.
+            </video>
+        </div>
+
+        <div>
+            <video controls muted loop preload="metadata" 
+                   src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/videos%20huayna%20potosi/uhd_60fps%20(1).mp4?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ2aWRlb3MgaHVheW5hIHBvdG9zaS91aGRfNjBmcHMgKDEpLm1wNCIsImiaWFiIjoxNzYzMDAzMTM2LCJleHAiOjE3OTQ1MzkxMzZ9.VL-Qd9GWYS7y4ds6jWlFuAQVdWkLe9x5bzxarFLAVg" 
+                   class="gallery-media">
+                Tu navegador no soporta el video.
+            </video>
+        </div>
+
+        <div>
+            <video controls muted loop preload="metadata" 
+                   src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/videos%20huayna%20potosi/uhd_60fps%20(2).mp4?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ2aWRlb3MgaHVheW5hIHBvdG9zaS91aGRfNjBmcHMgKDIpLm1wNCIsImiaWFiIjoxNzYzMDAzMTQ4LCJleHAiOjE3OTQ1MzkxNDh9.8QEJSJIGTjzp39OU_OvqOLGpTk5F_eK7Lwj6c2Zefx0" 
+                   class="gallery-media">
+                Tu navegador no soporta el video.
+            </video>
+        </div>
+
+        <div>
+            <video controls muted loop preload="metadata" 
+                   src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/videos%20huayna%20potosi/uhd_60fps%20(3).mp4?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ2aWRlb3MgaHVheW5hIHBvdG9zaS91aGRfNjBmcHMgKDMpLm1wNCIsImiaWFiIjoxNzYzMDAzMTY2LCJleHAiOjE3OTQ1MzkxNjZ9.JMq_RVoWbjxOeBbMe-HDtRczz5VwHLYvXlxKrCRRLEU" 
+                   class="gallery-media">
+                Tu navegador no soporta el video.
+            </video>
+        </div>
+
+        <div>
+            <video controls muted loop preload="metadata" 
+                   src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/videos%20huayna%20potosi/uhd_60fps.mp4?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ2aWRlb3MgaHVheW5hIHBvdG9zaS91aGRfNjBmcHMubXA0IiwiaWF0IjoxNzYzMDAzMTc4LCJleHAiOjE3OTQ1MzkxNzh9.NRpfcCOwQ7dpp5yRFxThMzbya-ys8dSlrLVRPtFKPws" 
+                   class="gallery-media">
+                Tu navegador no soporta el video.
+            </video>
+        </div>
+
+        <img src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0005.jpg" class="gallery-media" alt="Glaciar Andino">
+        
+        <img src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0008.jpg" class="gallery-media" alt="Glaciar Andino">
+        
+        <img src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0013.jpg" class="gallery-media" alt="Glaciar Andino">
+
+        <img src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0014.jpg" class="gallery-media" alt="Glaciar Andino">
+
+        <img src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0015.jpg" class="gallery-media" alt="Glaciar Andino">
+
+        <img src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0016.jpg" class="gallery-media" alt="Glaciar Andino">
+
+        <img src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0017.jpg" class="gallery-media" alt="Glaciar Andino">
+
+        <img src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0018.jpg" class="gallery-media" alt="Glaciar Andino">
+
+        <img src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0019.jpg" class="gallery-media" alt="Glaciar Andino">
+
+        <img src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0053.jpg" class="gallery-media" alt="Glaciar Andino">
+
+    </div>
+</section>
+
+
+<section id="conclusiones" class="section">
+    <h2>✅ Conclusiones y Fuentes</h2>
+    <p>El impacto del deshielo es crítico para la hidrología local. Conoce más y apoya la investigación.</p>
+    <ul>
+        <li>📧 Contacto: info@proyecto.org</li>
+        <li>🔗 Enlace a fuentes de datos y estudios científicos.</li>
+    </ul>
+</section>
+
+<script>
+// SCROLL JAVASCRIPT: Mantener solo la lógica de scroll para el index
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href'); 
+        if (!targetId.startsWith('#')) return;
+        e.preventDefault(); 
+        const navbarElement = document.getElementById('navbar');
+        const navbarHeight = navbarElement ? navbarElement.offsetHeight : 0; 
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            const targetPosition = targetElement.offsetTop - navbarHeight;
+            window.scrollTo({
+                top: targetPosition, 
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('#navbar nav');
+
+        if (menuToggle && nav) {
+            menuToggle.addEventListener('click', () => {
+                // Alterna la clase 'nav-open' en el contenedor <nav>
+                nav.classList.toggle('nav-open');
+            });
+        }
+    });
+</script>
+</body>
+</html>
