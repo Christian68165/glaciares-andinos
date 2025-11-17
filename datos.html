@@ -1,71 +1,88 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8" />
-    <title>Glaciares Andinos: Reporte Histórico de Datos</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="utf-8" />
+    <title>Glaciares Andinos: Reporte Histórico de Datos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-        <header id="navbar">
-        <div class="logo">
-            <a href="index.html">Glaciares Andinos 🏔️</a> 
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="mapa.html">Mapa Interactivo 🗺</a></li> 
-                <li><a href="simulacion.html">Simulación de Deshielo 🧊</a></li>
-                <li class="active"><a href="datos.html">Datos y Deshielo</a></li> 
-                <li><a href="impacto.html">Impacto Ambiental</a></li>
-                <li><a href="proyectos.html">Proyectos</a></li>
-                <li><a href="index.html#galeria">Galería</a></li>
-                <li><a href="index.html#conclusiones">Contacto</a></li>
-            </ul>
-        </nav>
-        <button class="menu-toggle">☰</button>
-    </header>
+    <header id="navbar">
+        <div class="logo">
+            <a href="index.html">Glaciares Andinos 🏔️</a> 
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="mapa.html">Mapa Interactivo 🗺</a></li> 
+                <li><a href="simulacion.html">Simulación de Deshielo 🧊</a></li>
+                <li class="active"><a href="datos.html">Datos y Deshielo</a></li> 
+                <li><a href="impacto.html">Impacto Ambiental</a></li>
+                <li><a href="proyectos.html">Proyectos</a></li>
+                <li><a href="index.html#galeria">Galería</a></li>
+                <li><a href="index.html#conclusiones">Contacto</a></li>
+            </ul>
+        </nav>
+        <button class="menu-toggle">☰</button>
+    </header>
 
-    <section id="datos-historicos" class="section">
-        <h2>📖 Datos y Deshielo Histórico</h2>
-        <p>A continuación, se presenta el reporte interactivo que resume la evolución histórica del área, volumen y factores climatológicos de los glaciares Chacaltaya y Huayna Potosí. Debido a restricciones de seguridad, es posible que se requiera **iniciar sesión con una cuenta de organización** para visualizar el informe completo.</p>
+    <section id="datos-historicos" class="section">
+        <h2>📖 Datos y Deshielo Histórico</h2>
+        <p>A continuación, se presenta el reporte interactivo que resume la evolución histórica del área, volumen y factores climatológicos de los glaciares Chacaltaya y Huayna Potosí. Debido a restricciones de seguridad, es posible que se requiera **iniciar sesión con una cuenta de organización** para visualizar el informe completo.</p>
 
-        <hr style="margin: 30px 0; border-color: #ddd;">
+        <hr style="margin: 30px 0; border-color: #ddd;">
 
-        <div id="reportContainer" class="data-section-container" style="margin-top: 20px;">
-            <h3>Reporte Interactivo de Reducción Glaciar</h3>
-            
-            <div class="powerbi-container">
-                <iframe 
-                    id="powerBiIframe"
-                    title="Reporte de Glaciares" 
-                    width="100%" 
-                    height="100%"
-                    src="https://app.powerbi.com/reportEmbed?reportId=8be72636-b731-43d8-9218-3b8d1bdaea38&autoAuth=true&ctid=fd6667da-eb0e-4d20-9c88-c20cd77438f6" 
-                    frameborder="0" 
-                    allowFullScreen="true">
-                </iframe>
-            </div>
-        </div>
-    </section>
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const menuToggle = document.querySelector('.menu-toggle');
-                const nav = document.querySelector('#navbar nav');
-        
-                if (menuToggle && nav) {
-                    menuToggle.addEventListener('click', () => {
-                        // Alterna la clase 'nav-open' en el contenedor <nav>
-                        nav.classList.toggle('nav-open');
-                    });
-                }
-            });
-        </script>
-    </body>
+        <div id="reportContainer" class="data-section-container" style="margin-top: 20px;">
+            <h3>Reporte Interactivo de Reducción Glaciar</h3>
+            
+            <div class="powerbi-container">
+                <iframe 
+                    id="powerBiIframe"
+                    title="Reporte de Glaciares" 
+                    width="100%" 
+                    height="100%"
+                    src="https://app.powerbi.com/reportEmbed?reportId=8be72636-b731-43d8-9218-3b8d1bdaea38&autoAuth=true&ctid=fd6667da-eb0e-4d20-9c88-c20cd77438f6" 
+                    frameborder="0" 
+                    allowFullScreen="true">
+                </iframe>
+            </div>
+        </div>
+        
+        <hr style="margin: 50px 0; border-color: #ddd;">
 
+        <div id="glacierHistoryContainer" class="data-section-container">
+            <h3>1. Historia y Evolución del Glaciar (Tabla)</h3>
+            <p>Cargando datos de `tbHistoriaGlaciar`...</p>
+        </div>
+
+        <div id="factorDeshieloContainer" class="data-section-container">
+            <h3>2. Factores Climatológicos Clave (Tarjetas)</h3>
+            <p>Cargando datos de `tbFactorDeshieloContaminacion`...</p>
+        </div>
+    </section>
+
+    <script src="data-loader.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // ✅ LLAMADAS A LAS FUNCIONES PARA CARGAR DATOS
+            loadGlaciarHistory();
+            loadFactorData();
+
+            // Script para el menú móvil (se mantiene)
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('#navbar nav');
+    
+            if (menuToggle && nav) {
+                menuToggle.addEventListener('click', () => {
+                    nav.classList.toggle('nav-open');
+                });
+            }
+        });
+    </script>
+</body>
 </html>
