@@ -6,7 +6,7 @@
     --color-accent: #FFD700; /* Dorado/Amarillo (Resalte) */
     --color-text: #333; /* Texto por defecto a oscuro (legible) */
     --color-bg: #f4f4f9; /* Gris muy claro (fondo de las secciones) */
-    --color-light: #ffffff; /* Blanco puro (para tarjetas, tablas, etc.) */
+    --color-light: #ffffff; /* Blanco puro (para tarjetas y tablas) */
     --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
     --shadow-heavy: 0 4px 12px rgba(0,0,0,0.25);
 }
@@ -33,7 +33,7 @@ h1, h2, h3 {
 /* Compensar el contenido para que no quede debajo del Navbar fijo */
 .section {
     padding: 100px 5% 40px 5%; 
-    /* ✅ CORRECCIÓN CLAVE: Altura automática para que el Power BI se vea completo */
+    /* ✅ CLAVE: Altura automática para que el contenido de Power BI se expanda */
     min-height: auto; 
     box-sizing: border-box;
     scroll-margin-top: 70px;
@@ -69,13 +69,13 @@ h1, h2, h3 {
 }
 
 /* ================================== */
-/* 3. HEADER / NAVBAR (Menú Fijo) (sin cambios) */
+/* 3. HEADER / NAVBAR (Menú Fijo) */
 /* ================================== */
 #navbar {
     position: sticky; 
     top: 0;
     width: 100%;
-    height: 70px; 
+    height: 70px; /* Altura de escritorio */
     background-color: var(--color-primary);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     z-index: 1000;
@@ -266,7 +266,7 @@ h1, h2, h3 {
 .powerbi-container {
     position: relative; 
     width: 100%;
-    padding-bottom: 75%; 
+    padding-bottom: 75%; /* Proporción 4:3 para el iframe */
     height: 0; 
     overflow: hidden; 
     margin-top: 20px;
@@ -311,15 +311,15 @@ h1, h2, h3 {
 }
 
 /* ================================== */
-/* 7. RESPONSIVE (AJUSTE DEL MENÚ MÓVIL) (sin cambios) */
+/* 7. RESPONSIVE (AJUSTE DEL MENÚ MÓVIL) */
 /* ================================== */
 @media (max-width: 900px) {
     #navbar { 
-        height: 60px; /* Menú más pequeño en móvil */
+        height: 60px; /* ✅ El menú se hace más pequeño aquí (60px) */
         padding: 0 20px;
     }
 
-    /* INICIO: CÓDIGO AÑADIDO PARA MENÚ MÓVIL */
+    /* INICIO: CÓDIGO AÑADIDO PARA MENÚ MÓVIL (sin cambios) */
     .menu-toggle {
         display: block; 
         background: none;
@@ -333,7 +333,7 @@ h1, h2, h3 {
     #navbar nav { 
         display: none; 
         position: absolute;
-        top: 60px; 
+        top: 60px; /* Se abre justo debajo del menú de 60px de alto */
         left: 0;
         width: 100%;
         background-color: var(--color-primary); 
