@@ -18,25 +18,47 @@ body {
     margin: 0; 
     padding: 0; 
     font-family: 'Roboto', sans-serif;
-    background-color: var(--color-bg); /* Fondo base sólido */
-    color: var(--color-text); /* Texto por defecto oscuro */
+    background-color: var(--color-primary); /* Fondo base sólido oscuro para el borde de la página */
+    color: var(--color-text); 
     scroll-behavior: smooth; 
 }
 
 h1, h2, h3 { 
     font-family: 'Montserrat', sans-serif;
-    color: var(--color-primary); /* Títulos por defecto a color primario */
+    color: var(--color-primary); 
 }
 
-/* Compensar el contenido para que no quede debajo del Navbar fijo */
+/* ================================================= */
+/* ✅ SECCIONES DE CONTENIDO CON FONDO DE IMAGEN */
+/* ================================================= */
 .section {
     padding: 100px 5% 40px 5%; 
-    /* ✅ CLAVE: Altura automática para que el contenido se expanda */
     min-height: auto; 
     box-sizing: border-box;
     scroll-margin-top: 70px;
-    background-color: var(--color-bg); /* Fondo gris claro */
-    color: var(--color-text);
+    
+    /* 🛑 NUEVO FONDO DE IMAGEN CON OVERLAY 🛑 */
+    background-image: linear-gradient(rgba(30, 60, 114, 0.75), rgba(30, 60, 114, 0.75)), /* Overlay azul oscuro semi-transparente */
+                      url('https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0013.jpg'); 
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed; /* Efecto Parallax */
+    
+    color: var(--color-light); /* Texto principal ahora blanco para contraste */
+    border-top: 1px solid rgba(255, 255, 255, 0.2); 
+}
+
+/* Ajuste de colores de texto para el fondo oscuro */
+.section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: var(--color-accent); /* Título principal a amarillo */
+    border-bottom: 3px solid var(--color-accent);
+    padding-bottom: 10px;
+}
+.section h3 {
+    color: var(--color-light); /* Subtítulos a blanco */
+    margin-top: 30px;
 }
 
 /* La portada (home) DEBE tener la altura mínima de la ventana */
@@ -45,6 +67,22 @@ h1, h2, h3 {
     padding-top: 150px; 
     padding-bottom: 80px;
     min-height: 100vh; 
+    /* El fondo de Home ya es una imagen, por eso se define aquí de nuevo y no en .section */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), 
+                      url('https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0013.jpg'); 
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    
+    position: relative; 
+    overflow: hidden; 
+    
+    color: white; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 /* Botones (sin cambios) */
@@ -73,7 +111,7 @@ h1, h2, h3 {
     position: sticky; 
     top: 0;
     width: 100%;
-    height: 70px; /* Altura de escritorio */
+    height: 70px; 
     background-color: var(--color-primary);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     z-index: 1000;
@@ -127,23 +165,7 @@ h1, h2, h3 {
 /* ================================== */
 /* 4. PORTADA / HOME (Fondo de Imagen) */
 /* ================================== */
-#home {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), 
-                      url('https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0013.jpg'); 
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
-    
-    position: relative; 
-    overflow: hidden; 
-    
-    color: white; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
+/* Estilos ya definidos en #home arriba */
 
 #home h1 {
     font-size: 3.8rem; 
@@ -203,37 +225,30 @@ h1, h2, h3 {
 /* ================================== */
 #datos-historicos, #impacto-ambiental, #reconstruccion, #galeria, #conclusiones {
     scroll-margin-top: 70px;
-    border-top: 1px solid #ddd;
+    /* border-top definido en .section ahora es un borde blanco semi-transparente */
 }
-/* ✅ REGLA CRÍTICA PARA DATOS: Asegura la altura dinámica del reporte de Power BI */
+
+/* Regla crítica para datos: Asegura la altura dinámica del reporte de Power BI */
 #datos-historicos {
     min-height: auto !important;
     height: auto !important;
 }
 
-.section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-    border-bottom: 3px solid var(--color-accent);
-    padding-bottom: 10px;
-}
-.section h3 {
-    color: var(--color-primary); 
-    margin-top: 30px;
-}
 .data-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));  
     gap: 30px;
     margin-top: 20px;
 }
+
+/* 🛑 AJUSTE DE COLOR EN TARJETAS PARA EL FONDO OSCURO 🛑 */
 .data-card {
     padding: 25px;
     border-radius: 12px;
     background-color: var(--color-light); /* Fondo blanco puro */
-    color: #333; 
+    color: #333; /* Texto oscuro dentro de la tarjeta */
     box-shadow: var(--shadow-light);
-    border-left: 5px solid var(--color-primary); 
+    border-left: 5px solid var(--color-accent); /* Borde de acento amarillo */
     transition: transform 0.2s;
 }
 /* Aseguramos que los títulos dentro de las tarjetas sean oscuros (Azul Primario) */
@@ -270,13 +285,13 @@ h1, h2, h3 {
 .powerbi-container {
     position: relative; 
     width: 100%;
-    padding-bottom: 75%; /* Proporción 4:3 para el iframe */
+    padding-bottom: 75%; 
     height: 0; 
     overflow: hidden; 
     margin-top: 20px;
     box-shadow: var(--shadow-heavy); 
     border-radius: 8px; 
-    background-color: var(--color-light); /* Fondo blanco puro */
+    background-color: var(--color-light); /* Fondo claro para que el iframe tenga contraste */
 }
 
 /* El Iframe ocupa el 100% del contenedor responsive */
@@ -309,7 +324,6 @@ h1, h2, h3 {
 }
 /* ======================================================= */
 /* 🛑 CORRECCIÓN DE COLOR DE TEXTO EN POPUP DE MAPBOX 🛑 (sin cambios) */
-/* Regla añadida para asegurar que el texto sea negro y legible */
 .mapboxgl-popup-content * {
     color: #000000 !important; 
 }
@@ -319,11 +333,10 @@ h1, h2, h3 {
 /* ================================== */
 @media (max-width: 900px) {
     #navbar { 
-        height: 60px; /* Menú más pequeño en móvil */
+        height: 60px; 
         padding: 0 20px;
     }
 
-    /* INICIO: CÓDIGO AÑADIDO PARA MENÚ MÓVIL (sin cambios) */
     .menu-toggle {
         display: block; 
         background: none;
@@ -337,7 +350,7 @@ h1, h2, h3 {
     #navbar nav { 
         display: none; 
         position: absolute;
-        top: 60px; /* Se abre justo debajo del menú de 60px de alto */
+        top: 60px; 
         left: 0;
         width: 100%;
         background-color: var(--color-primary); 
@@ -363,7 +376,6 @@ h1, h2, h3 {
     .nav-open {
         display: block !important; 
     }
-    /* FIN: CÓDIGO AÑADIDO PARA MENÚ MÓVIL */
 
 
     .section { 
