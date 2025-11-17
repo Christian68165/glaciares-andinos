@@ -5,8 +5,8 @@
     --color-primary: #1e3c72; /* Azul profundo (Andino) */
     --color-accent: #FFD700; /* Dorado/Amarillo (Resalte) */
     --color-text: #333; /* Texto por defecto a oscuro (legible) */
-    --color-bg: #f4f4f9; /* Gris muy claro (fondo de las secciones) */
-    --color-light: #ffffff; /* Blanco puro (para tarjetas y tablas) */
+    --color-bg: #f4f4f9; /* Gris muy claro (fondo de las tarjetas) */
+    --color-light: #ffffff; /* Blanco puro (para texto y tablas) */
     --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
     --shadow-heavy: 0 4px 12px rgba(0,0,0,0.25);
 }
@@ -18,7 +18,7 @@ body {
     margin: 0; 
     padding: 0; 
     font-family: 'Roboto', sans-serif;
-    background-color: var(--color-primary); /* Fondo base sólido oscuro para el borde de la página */
+    background-color: var(--color-primary); 
     color: var(--color-text); 
     scroll-behavior: smooth; 
 }
@@ -29,23 +29,41 @@ h1, h2, h3 {
 }
 
 /* ================================================= */
-/* ✅ SECCIONES DE CONTENIDO CON FONDO DE IMAGEN */
+/* ✅ SECCIONES DE CONTENIDO CON FONDO DE IMAGEN Y OVERLAY */
 /* ================================================= */
 .section {
+    /* Claves para el fondo: Posicionamiento y Apilamiento */
+    position: relative; 
+    overflow: hidden; 
+    z-index: 1; /* Asegura que el contenido quede encima del fondo ::before */
+    
     padding: 100px 5% 40px 5%; 
     min-height: auto; 
     box-sizing: border-box;
     scroll-margin-top: 70px;
     
-    /* 🛑 NUEVO FONDO DE IMAGEN CON OVERLAY 🛑 */
-    background-image: linear-gradient(rgba(30, 60, 114, 0.75), rgba(30, 60, 114, 0.75)), /* Overlay azul oscuro semi-transparente */
-                      url('https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0013.jpg'); 
+    background-color: transparent; /* Permite ver el fondo ::before */
+    
+    color: var(--color-light); /* Texto de la sección a blanco */
+    border-top: 1px solid rgba(255, 255, 255, 0.2); 
+}
+
+/* 🛑 PSEUDO-ELEMENTO PARA EL FONDO DE IMAGEN FIJO Y EL OVERLAY AZUL OSCURO 🛑 */
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Imagen y overlay */
+    background-image: linear-gradient(rgba(30, 60, 114, 0.8), rgba(30, 60, 114, 0.8)), /* Overlay azul más opaco (80%) */
+                      url('https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0013.jpg');
     background-size: cover;
     background-position: center center;
-    background-attachment: fixed; /* Efecto Parallax */
-    
-    color: var(--color-light); /* Texto principal ahora blanco para contraste */
-    border-top: 1px solid rgba(255, 255, 255, 0.2); 
+    background-attachment: fixed; /* Esto crea el efecto de fondo fijo (Parallax) */
+    z-index: -1; /* Manda el fondo detrás del contenido */
 }
 
 /* Ajuste de colores de texto para el fondo oscuro */
@@ -63,11 +81,7 @@ h1, h2, h3 {
 
 /* La portada (home) DEBE tener la altura mínima de la ventana */
 #home {
-    scroll-margin-top: 70px; 
-    padding-top: 150px; 
-    padding-bottom: 80px;
-    min-height: 100vh; 
-    /* El fondo de Home ya es una imagen, por eso se define aquí de nuevo y no en .section */
+    /* El fondo de Home mantiene su definición independiente para un overlay más sutil */
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), 
                       url('https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0013.jpg'); 
     background-size: cover;
@@ -77,31 +91,17 @@ h1, h2, h3 {
     position: relative; 
     overflow: hidden; 
     
+    scroll-margin-top: 70px; 
+    padding-top: 150px; 
+    padding-bottom: 80px;
+    min-height: 100vh; 
+    
     color: white; 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-}
-
-/* Botones (sin cambios) */
-.btn { 
-    display: inline-block; 
-    padding: 12px 25px; 
-    background-color: var(--color-accent); 
-    color: var(--color-primary); 
-    text-decoration: none; 
-    border-radius: 50px; 
-    margin-top: 20px; 
-    font-weight: 700;
-    transition: background-color 0.3s, transform 0.3s; 
-    box-shadow: var(--shadow-heavy);
-    text-transform: uppercase;
-}
-.btn:hover { 
-    background-color: #e0b400; 
-    transform: translateY(-2px); 
 }
 
 /* ================================== */
@@ -163,10 +163,8 @@ h1, h2, h3 {
 }
 
 /* ================================== */
-/* 4. PORTADA / HOME (Fondo de Imagen) */
+/* 4. PORTADA / HOME (Estilos ya definidos) */
 /* ================================== */
-/* Estilos ya definidos en #home arriba */
-
 #home h1 {
     font-size: 3.8rem; 
     color: var(--color-light); 
@@ -225,7 +223,6 @@ h1, h2, h3 {
 /* ================================== */
 #datos-historicos, #impacto-ambiental, #reconstruccion, #galeria, #conclusiones {
     scroll-margin-top: 70px;
-    /* border-top definido en .section ahora es un borde blanco semi-transparente */
 }
 
 /* Regla crítica para datos: Asegura la altura dinámica del reporte de Power BI */
@@ -241,14 +238,14 @@ h1, h2, h3 {
     margin-top: 20px;
 }
 
-/* 🛑 AJUSTE DE COLOR EN TARJETAS PARA EL FONDO OSCURO 🛑 */
+/* AJUSTE DE COLOR EN TARJETAS PARA EL FONDO OSCURO */
 .data-card {
     padding: 25px;
     border-radius: 12px;
-    background-color: var(--color-light); /* Fondo blanco puro */
+    background-color: var(--color-light); /* Fondo de tarjeta blanco */
     color: #333; /* Texto oscuro dentro de la tarjeta */
     box-shadow: var(--shadow-light);
-    border-left: 5px solid var(--color-accent); /* Borde de acento amarillo */
+    border-left: 5px solid var(--color-accent); 
     transition: transform 0.2s;
 }
 /* Aseguramos que los títulos dentro de las tarjetas sean oscuros (Azul Primario) */
@@ -265,14 +262,14 @@ h1, h2, h3 {
     background-color: transparent; 
 }
 
-/* 🛑 Estilo para las TABLAS de datos generadas por JS 🛑 */
+/* Estilo para las TABLAS de datos generadas por JS */
 .data-table,
 .data-table thead,
 .data-table tbody,
 .data-table tr,
 .data-table td,
 .data-table th {
-    background-color: var(--color-light); /* Fondo blanco puro */
+    background-color: var(--color-light); 
     color: #333; 
     border-color: rgba(0, 0, 0, 0.2); 
 }
@@ -291,7 +288,7 @@ h1, h2, h3 {
     margin-top: 20px;
     box-shadow: var(--shadow-heavy); 
     border-radius: 8px; 
-    background-color: var(--color-light); /* Fondo claro para que el iframe tenga contraste */
+    background-color: var(--color-light); 
 }
 
 /* El Iframe ocupa el 100% del contenedor responsive */
@@ -322,8 +319,8 @@ h1, h2, h3 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     transition: transform 0.3s ease; 
 }
-/* ======================================================= */
-/* 🛑 CORRECCIÓN DE COLOR DE TEXTO EN POPUP DE MAPBOX 🛑 (sin cambios) */
+
+/* CORRECCIÓN DE COLOR DE TEXTO EN POPUP DE MAPBOX */
 .mapboxgl-popup-content * {
     color: #000000 !important; 
 }
