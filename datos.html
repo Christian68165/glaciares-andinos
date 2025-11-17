@@ -53,27 +53,10 @@
             </div>
         </div>
         
-        <hr style="margin: 50px 0; border-color: #ddd;">
-
-        <div id="glacierHistoryContainer" class="data-section-container">
-            <h3>1. Historia y Evolución del Glaciar (Tabla)</h3>
-            <p>Cargando datos de `tbHistoriaGlaciar`...</p>
-        </div>
-
-        <div id="factorDeshieloContainer" class="data-section-container">
-            <h3>2. Factores Climatológicos Clave (Tarjetas)</h3>
-            <p>Cargando datos de `tbFactorDeshieloContaminacion`...</p>
-        </div>
     </section>
 
-    <script src="data-loader.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // ✅ LLAMADAS A LAS FUNCIONES PARA CARGAR DATOS
-            loadGlaciarHistory();
-            loadFactorData();
-
-            // Script para el menú móvil (se mantiene)
             const menuToggle = document.querySelector('.menu-toggle');
             const nav = document.querySelector('#navbar nav');
     
