@@ -4,8 +4,8 @@
 :root {
     --color-primary: #1e3c72; /* Azul profundo (Andino) */
     --color-accent: #FFD700; /* Dorado/Amarillo (Resalte) */
-    --color-text: var(--color-light); /* Texto por defecto es blanco */
-    --color-bg: #f4f4f9;
+    --color-text: #333; /* Texto por defecto: oscuro/gris */
+    --color-bg: #f4f4f9; /* Fondo base (muy claro) */
     --color-light: #ffffff;
     --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
     --shadow-heavy: 0 4px 12px rgba(0,0,0,0.25);
@@ -18,45 +18,33 @@ body {
     margin: 0; 
     padding: 0; 
     font-family: 'Roboto', sans-serif;
-    /* CLAVE: El fondo del body debe ser transparente para ver el video */
-    background-color: transparent; 
-    color: var(--color-text); /* Ahora usa blanco */
+    /* CLAVE: Cambiamos de transparente a un color sólido para el fondo general */
+    background-color: var(--color-bg); 
+    /* Color de texto oscuro por defecto, excepto en la portada */
+    color: var(--color-text); 
     scroll-behavior: smooth; 
 }
 
-/* Estilos para el video de fondo global */
-#video-bg-global {
-    position: fixed; 
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    /* CRÍTICO: Envía el video detrás de TODO el contenido de la web */
-    z-index: -10; 
-    /* Centra el video */
-    transform: translate(-50%, -50%); 
-    /* Usar 'contain' para que se vea completo, no recortado (sin zoom) */
-    object-fit: contain; 
-    /* Fondo negro para las posibles barras laterales (pillarboxing) */
-    background-color: black; 
-}
+/* ❌ ESTILO DEL VIDEO DE FONDO ELIMINADO PARA MEJORAR EL RENDIMIENTO ❌ */
+/* #video-bg-global { ... } -> BLOQUE ELIMINADO */
 
 h1, h2, h3 { 
     font-family: 'Montserrat', sans-serif;
-    color: var(--color-light); /* Títulos principales a blanco */
+    /* Títulos por defecto son Azules (Primary) para las secciones blancas */
+    color: var(--color-primary); 
 }
 
 /* Compensar el contenido para que no quede debajo del Navbar fijo */
 .section {
     padding: 100px 5% 40px 5%; 
-    min-height: 100vh;
+    min-height: auto;
     box-sizing: border-box;
     scroll-margin-top: 70px; 
+    /* Fondo BLANCO para la legibilidad en las secciones de contenido */
+    background-color: var(--color-light); 
 }
 
-/* La portada (home) también debe tener el margen */
+/* La portada (home) */
 #home {
     scroll-margin-top: 70px; 
     padding-top: 150px; 
@@ -141,13 +129,20 @@ h1, h2, h3 {
 }
 
 /* ================================== */
-/* 4. PORTADA / HOME             */
+/* 4. PORTADA / HOME              */
 /* ================================== */
 #home {
+    /* 🛑 NUEVO FONDO DE IMAGEN FIJO 🛑 */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), 
+                      url('https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0013.jpg'); 
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed; /* Efecto Parallax fijo */
+    min-height: 100vh; /* Asegura que ocupe toda la pantalla */
+    
     position: relative; 
     overflow: hidden; 
-    /* Fondo transparente para ver el video */
-    
+    background-color: transparent; 
     color: white; 
     display: flex;
     flex-direction: column;
@@ -158,14 +153,15 @@ h1, h2, h3 {
 
 #home h1 {
     font-size: 3.8rem; 
-    color: var(--color-light);
-    /* Mantener text-shadow para mejorar la legibilidad del texto blanco sobre el video */
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+    color: var(--color-light); /* Asegurar que el título del home sea BLANCO */
+    /* Sombra para que el texto blanco resalte sobre la imagen */
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8); 
     margin-bottom: 0.5rem;
 }
 #home p {
     font-size: 1.2rem;
     max-width: 700px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8); /* Sombra para el párrafo */
 }
 
 /* ================================== */
@@ -180,9 +176,9 @@ h1, h2, h3 {
 #sidebar {
     width: 300px; 
     padding: 30px 20px; 
-    /* El sidebar necesita fondo BLANCO y texto OSCURO para la legibilidad del mapa */
+    /* El sidebar necesita fondo BLANCO y texto OSCURO */
     background-color: var(--color-light);
-    color: var(--color-primary); /* Texto oscuro en el sidebar */
+    color: var(--color-primary); 
     box-shadow: 2px 0 10px rgba(0,0,0,0.15); 
     position: relative; 
     height: 100%; 
@@ -214,21 +210,19 @@ h1, h2, h3 {
 /* 6. SECCIONES DE CONTENIDO / DASHBOARD AREA */
 /* ================================== */
 #datos-historicos, #impacto-ambiental, #reconstruccion, #galeria, #conclusiones {
-    /* Fondo completamente transparente para ver el video */
     scroll-margin-top: 70px;
     min-height: auto; 
-    /* El color del texto será BLANCO por herencia del body */
     border-top: 1px solid #ddd;
 }
 .section h2 {
     font-size: 2.5rem;
     margin-bottom: 40px;
     border-bottom: 3px solid var(--color-accent);
-    /* El color del título es blanco */
+    /* El color del título es el Primary (Azul) por la regla general h2 */
     padding-bottom: 10px;
 }
 .section h3 {
-    color: var(--color-light); /* Títulos h3 a blanco */
+    /* Usará var(--color-primary) por la regla general h3 */
     margin-top: 30px;
 }
 .data-grid {
@@ -240,10 +234,9 @@ h1, h2, h3 {
 .data-card {
     padding: 25px;
     border-radius: 12px;
-    /* 🛑 Fondo blanco semitransparente para ver el video detrás 🛑 */
-    background-color: rgba(255, 255, 255, 0.9); 
-    /* Aseguramos que el texto dentro de las tarjetas VUELVA a ser oscuro */
-    color: #333; 
+    /* 🛑 Ahora el fondo es blanco SÓLIDO (var(--color-light)) 🛑 */
+    background-color: var(--color-light); 
+    color: var(--color-text); /* Aseguramos texto oscuro */
     box-shadow: var(--shadow-light);
     border-left: 5px solid var(--color-primary); 
     transition: transform 0.2s;
@@ -269,11 +262,9 @@ h1, h2, h3 {
 .data-table tr,
 .data-table td,
 .data-table th {
-    /* Fondo blanco semitransparente para ver el video a través de las tablas */
-    background-color: rgba(255, 255, 255, 0.9);
-    /* Asegurar que el color del texto sea oscuro para contraste */
-    color: #333;
-    /* Hacer el borde semitransparente o sólido si se desea */
+    /* 🛑 Fondo blanco SÓLIDO (var(--color-light)) 🛑 */
+    background-color: var(--color-light);
+    color: var(--color-text); /* Asegurar que el color del texto sea oscuro */
     border-color: rgba(0, 0, 0, 0.2); 
 }
 
@@ -401,6 +392,3 @@ h1, h2, h3 {
     color: #000000 !important; /* Fuerza el color negro para todo el contenido del popup */
 }
 /* ======================================================= */
-
-
-
