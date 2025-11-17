@@ -1,11 +1,11 @@
 /* ================================== */
-/* 1. VARIABLES DE DISEÑO    */
+/* 1. VARIABLES DE DISEÑO     */
 /* ================================== */
 :root {
     --color-primary: #1e3c72; /* Azul profundo (Andino) */
     --color-accent: #FFD700; /* Dorado/Amarillo (Resalte) */
-    --color-text: #333; /* Texto por defecto: oscuro/gris */
-    --color-bg: #f4f4f9; /* Fondo base (muy claro) */
+    --color-text: #333; /* ⬅️ CAMBIO: Texto por defecto a oscuro para legibilidad en secciones blancas */
+    --color-bg: #f4f4f9;
     --color-light: #ffffff;
     --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
     --shadow-heavy: 0 4px 12px rgba(0,0,0,0.25);
@@ -18,40 +18,39 @@ body {
     margin: 0; 
     padding: 0; 
     font-family: 'Roboto', sans-serif;
-    /* CLAVE: Cambiamos de transparente a un color sólido para el fondo general */
+    /* ⬅️ CAMBIO: Fondo base sólido, no transparente, para ver bajo el navbar */
     background-color: var(--color-bg); 
-    /* Color de texto oscuro por defecto, excepto en la portada */
-    color: var(--color-text); 
+    color: var(--color-text); /* Ahora usa color oscuro por defecto */
     scroll-behavior: smooth; 
 }
 
-/* ❌ ESTILO DEL VIDEO DE FONDO ELIMINADO PARA MEJORAR EL RENDIMIENTO ❌ */
-/* #video-bg-global { ... } -> BLOQUE ELIMINADO */
+/* ❌ ESTILOS PARA EL VIDEO DE FONDO (#video-bg-global) ELIMINADOS ❌ */
 
 h1, h2, h3 { 
     font-family: 'Montserrat', sans-serif;
-    /* Títulos por defecto son Azules (Primary) para las secciones blancas */
+    /* ⬅️ CAMBIO: Títulos principales a color primario, serán blancos solo en #home */
     color: var(--color-primary); 
 }
 
 /* Compensar el contenido para que no quede debajo del Navbar fijo */
 .section {
     padding: 100px 5% 40px 5%; 
-    min-height: auto;
+    min-height: 100vh;
     box-sizing: border-box;
-    scroll-margin-top: 70px; 
-    /* Fondo BLANCO para la legibilidad en las secciones de contenido */
+    scroll-margin-top: 70px;
+    /* ⬅️ AÑADIDO: Fondo blanco sólido para todo el contenido (Galería, Conclusiones, etc.) */
     background-color: var(--color-light); 
+    color: var(--color-text); /* Texto oscuro en secciones blancas */
 }
 
-/* La portada (home) */
+/* La portada (home) también debe tener el margen */
 #home {
     scroll-margin-top: 70px; 
     padding-top: 150px; 
     padding-bottom: 80px;
 }
 
-/* Botones */
+/* Botones (sin cambios) */
 .btn { 
     display: inline-block; 
     padding: 12px 25px; 
@@ -71,7 +70,7 @@ h1, h2, h3 {
 }
 
 /* ================================== */
-/* 3. HEADER / NAVBAR (Menú Fijo) */
+/* 3. HEADER / NAVBAR (Menú Fijo) (sin cambios) */
 /* ================================== */
 #navbar {
     position: sticky; 
@@ -129,20 +128,21 @@ h1, h2, h3 {
 }
 
 /* ================================== */
-/* 4. PORTADA / HOME              */
+/* 4. PORTADA / HOME ⬅️ CAMBIO DE FONDO */
 /* ================================== */
 #home {
-    /* 🛑 NUEVO FONDO DE IMAGEN FIJO 🛑 */
+    /* 🚀 NUEVO FONDO DE IMAGEN FIJO 🚀 */
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), 
                       url('https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0013.jpg'); 
     background-size: cover;
     background-position: center center;
-    background-attachment: fixed; /* Efecto Parallax fijo */
-    min-height: 100vh; /* Asegura que ocupe toda la pantalla */
+    background-attachment: fixed; /* Efecto Parallax */
+    min-height: 100vh;
+    /* --------------------------------- */
     
     position: relative; 
     overflow: hidden; 
-    background-color: transparent; 
+    
     color: white; 
     display: flex;
     flex-direction: column;
@@ -153,19 +153,20 @@ h1, h2, h3 {
 
 #home h1 {
     font-size: 3.8rem; 
-    color: var(--color-light); /* Asegurar que el título del home sea BLANCO */
-    /* Sombra para que el texto blanco resalte sobre la imagen */
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8); 
+    color: var(--color-light); /* Fuerza el color a blanco para que se vea sobre la imagen */
+    /* Mantener text-shadow para mejorar la legibilidad del texto blanco sobre la imagen */
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
     margin-bottom: 0.5rem;
 }
 #home p {
     font-size: 1.2rem;
     max-width: 700px;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.8); /* Sombra para el párrafo */
+    /* ⬅️ AÑADIDO: Sombra para el párrafo */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
 }
 
 /* ================================== */
-/* 5. MAPA INTERACTIVO - CÓDIGO FINAL CORREGIDO */
+/* 5. MAPA INTERACTIVO - CÓDIGO FINAL CORREGIDO (sin cambios) */
 /* ================================== */
 #mapa-interactivo {
     display: flex;
@@ -178,7 +179,7 @@ h1, h2, h3 {
     padding: 30px 20px; 
     /* El sidebar necesita fondo BLANCO y texto OSCURO */
     background-color: var(--color-light);
-    color: var(--color-primary); 
+    color: var(--color-primary); /* Texto oscuro en el sidebar */
     box-shadow: 2px 0 10px rgba(0,0,0,0.15); 
     position: relative; 
     height: 100%; 
@@ -207,41 +208,44 @@ h1, h2, h3 {
 .loading { font-size:12px; color:#666; margin-top: 15px; }
 
 /* ================================== */
-/* 6. SECCIONES DE CONTENIDO / DASHBOARD AREA */
+/* 6. SECCIONES DE CONTENIDO / DASHBOARD AREA ⬅️ AJUSTES DE COLOR */
 /* ================================== */
 #datos-historicos, #impacto-ambiental, #reconstruccion, #galeria, #conclusiones {
+    /* ❌ ELIMINADO: Fondo completamente transparente para ver el video */
     scroll-margin-top: 70px;
-    min-height: auto; 
+    min-height: auto;  
+    /* ❌ ELIMINADO: El color del texto será BLANCO por herencia del body */
     border-top: 1px solid #ddd;
 }
 .section h2 {
     font-size: 2.5rem;
     margin-bottom: 40px;
     border-bottom: 3px solid var(--color-accent);
-    /* El color del título es el Primary (Azul) por la regla general h2 */
+    /* ❌ ELIMINADO: El color del título es blanco (Ahora será color primario por la regla h2 global) */
     padding-bottom: 10px;
 }
 .section h3 {
-    /* Usará var(--color-primary) por la regla general h3 */
+    color: var(--color-primary); /* ⬅️ CAMBIO: Títulos h3 a color primario (oscuro) */
     margin-top: 30px;
 }
 .data-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));  
     gap: 30px;
     margin-top: 20px;
 }
 .data-card {
     padding: 25px;
     border-radius: 12px;
-    /* 🛑 Ahora el fondo es blanco SÓLIDO (var(--color-light)) 🛑 */
+    /* ⬅️ CAMBIO: Fondo BLANCO SÓLIDO (ya no semitransparente) */
     background-color: var(--color-light); 
-    color: var(--color-text); /* Aseguramos texto oscuro */
+    /* Aseguramos que el texto dentro de las tarjetas VUELVA a ser oscuro (sin cambios) */
+    color: #333; 
     box-shadow: var(--shadow-light);
     border-left: 5px solid var(--color-primary); 
     transition: transform 0.2s;
 }
-/* Aseguramos que los títulos dentro de las tarjetas sean oscuros (Azul Primario) */
+/* Aseguramos que los títulos dentro de las tarjetas sean oscuros (Azul Primario) (sin cambios) */
 .data-card h2, .data-card h3 {
     color: var(--color-primary); 
 }
@@ -250,26 +254,28 @@ h1, h2, h3 {
     box-shadow: var(--shadow-heavy);
 }
 
-/* Contenedores de datos que deben ser transparentes */
+/* Contenedores de datos que deben ser transparentes (sin cambios) */
 .data-section-container {
     background-color: transparent; 
 }
 
-/* 🛑 CORRECCIÓN FINAL: Estilo para las TABLAS de datos generadas por JS 🛑 */
+/* 🛑 Estilo para las TABLAS de datos generadas por JS 🛑 */
 .data-table,
 .data-table thead,
 .data-table tbody,
 .data-table tr,
 .data-table td,
 .data-table th {
-    /* 🛑 Fondo blanco SÓLIDO (var(--color-light)) 🛑 */
+    /* ⬅️ CAMBIO: Fondo BLANCO SÓLIDO (ya no semitransparente) */
     background-color: var(--color-light);
-    color: var(--color-text); /* Asegurar que el color del texto sea oscuro */
+    /* Asegurar que el color del texto sea oscuro para contraste (sin cambios) */
+    color: #333;
+    /* Hacer el borde semitransparente o sólido si se desea (sin cambios) */
     border-color: rgba(0, 0, 0, 0.2); 
 }
 
 /* ================================== */
-/* 7. RESPONSIVE (AJUSTE DEL MENÚ MÓVIL) */
+/* 7. RESPONSIVE (AJUSTE DEL MENÚ MÓVIL) (sin cambios) */
 /* ================================== */
 @media (max-width: 900px) {
     #navbar { 
@@ -342,7 +348,7 @@ h1, h2, h3 {
 }
 
 /* ================================== */
-/* 8. ESTILOS ESPECÍFICOS DE DATOS/POWER BI Y GALERÍA */
+/* 8. ESTILOS ESPECÍFICOS DE DATOS/POWER BI Y GALERÍA (sin cambios) */
 /* ================================== */
 
 /* Contenedor para la inserción de Power BI */
@@ -386,7 +392,7 @@ h1, h2, h3 {
     transition: transform 0.3s ease; 
 }
 /* ======================================================= */
-/* 🛑 CORRECCIÓN DE COLOR DE TEXTO EN POPUP DE MAPBOX 🛑 */
+/* 🛑 CORRECCIÓN DE COLOR DE TEXTO EN POPUP DE MAPBOX 🛑 (sin cambios) */
 /* Regla añadida para asegurar que el texto sea negro y legible */
 .mapboxgl-popup-content * {
     color: #000000 !important; /* Fuerza el color negro para todo el contenido del popup */
