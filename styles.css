@@ -4,9 +4,9 @@
 :root {
     --color-primary: #1e3c72; /* Azul profundo (Andino) */
     --color-accent: #FFD700; /* Dorado/Amarillo (Resalte) */
-    --color-text: #333; /* ⬅️ CAMBIO: Texto por defecto a oscuro para legibilidad en secciones blancas */
-    --color-bg: #f4f4f9;
-    --color-light: #ffffff;
+    --color-text: #333; /* Texto por defecto a oscuro */
+    --color-bg: #f4f4f9; /* Gris muy claro (para el fondo de las secciones) */
+    --color-light: #ffffff; /* Blanco puro (para tarjetas y tablas) */
     --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
     --shadow-heavy: 0 4px 12px rgba(0,0,0,0.25);
 }
@@ -18,9 +18,8 @@ body {
     margin: 0; 
     padding: 0; 
     font-family: 'Roboto', sans-serif;
-    /* ⬅️ CAMBIO: Fondo base sólido, no transparente, para ver bajo el navbar */
-    background-color: var(--color-bg); 
-    color: var(--color-text); /* Ahora usa color oscuro por defecto */
+    background-color: var(--color-bg); /* Fondo base sólido */
+    color: var(--color-text); /* Texto por defecto oscuro */
     scroll-behavior: smooth; 
 }
 
@@ -28,8 +27,7 @@ body {
 
 h1, h2, h3 { 
     font-family: 'Montserrat', sans-serif;
-    /* ⬅️ CAMBIO: Títulos principales a color primario, serán blancos solo en #home */
-    color: var(--color-primary); 
+    color: var(--color-primary); /* Títulos principales a color primario (oscuro) */
 }
 
 /* Compensar el contenido para que no quede debajo del Navbar fijo */
@@ -38,9 +36,9 @@ h1, h2, h3 {
     min-height: 100vh;
     box-sizing: border-box;
     scroll-margin-top: 70px;
-    /* ⬅️ AÑADIDO: Fondo blanco sólido para todo el contenido (Galería, Conclusiones, etc.) */
-    background-color: var(--color-light); 
-    color: var(--color-text); /* Texto oscuro en secciones blancas */
+    /* 🎨 CAMBIO CLAVE: Fondo gris muy claro para el CONTENEDOR DE SECCIÓN */
+    background-color: var(--color-bg); 
+    color: var(--color-text); /* Texto oscuro en secciones claras */
 }
 
 /* La portada (home) también debe tener el margen */
@@ -128,7 +126,7 @@ h1, h2, h3 {
 }
 
 /* ================================== */
-/* 4. PORTADA / HOME ⬅️ CAMBIO DE FONDO */
+/* 4. PORTADA / HOME (Fondo de Imagen) */
 /* ================================== */
 #home {
     /* 🚀 NUEVO FONDO DE IMAGEN FIJO 🚀 */
@@ -154,19 +152,17 @@ h1, h2, h3 {
 #home h1 {
     font-size: 3.8rem; 
     color: var(--color-light); /* Fuerza el color a blanco para que se vea sobre la imagen */
-    /* Mantener text-shadow para mejorar la legibilidad del texto blanco sobre la imagen */
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
     margin-bottom: 0.5rem;
 }
 #home p {
     font-size: 1.2rem;
     max-width: 700px;
-    /* ⬅️ AÑADIDO: Sombra para el párrafo */
     text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
 }
 
 /* ================================== */
-/* 5. MAPA INTERACTIVO - CÓDIGO FINAL CORREGIDO (sin cambios) */
+/* 5. MAPA INTERACTIVO (sin cambios) */
 /* ================================== */
 #mapa-interactivo {
     display: flex;
@@ -208,24 +204,21 @@ h1, h2, h3 {
 .loading { font-size:12px; color:#666; margin-top: 15px; }
 
 /* ================================== */
-/* 6. SECCIONES DE CONTENIDO / DASHBOARD AREA ⬅️ AJUSTES DE COLOR */
+/* 6. SECCIONES DE CONTENIDO / DASHBOARD AREA ⬅️ AJUSTES DE CONTRASTE */
 /* ================================== */
 #datos-historicos, #impacto-ambiental, #reconstruccion, #galeria, #conclusiones {
-    /* ❌ ELIMINADO: Fondo completamente transparente para ver el video */
     scroll-margin-top: 70px;
     min-height: auto;  
-    /* ❌ ELIMINADO: El color del texto será BLANCO por herencia del body */
     border-top: 1px solid #ddd;
 }
 .section h2 {
     font-size: 2.5rem;
     margin-bottom: 40px;
     border-bottom: 3px solid var(--color-accent);
-    /* ❌ ELIMINADO: El color del título es blanco (Ahora será color primario por la regla h2 global) */
     padding-bottom: 10px;
 }
 .section h3 {
-    color: var(--color-primary); /* ⬅️ CAMBIO: Títulos h3 a color primario (oscuro) */
+    color: var(--color-primary); /* Títulos h3 a color primario (oscuro) */
     margin-top: 30px;
 }
 .data-grid {
@@ -237,15 +230,14 @@ h1, h2, h3 {
 .data-card {
     padding: 25px;
     border-radius: 12px;
-    /* ⬅️ CAMBIO: Fondo BLANCO SÓLIDO (ya no semitransparente) */
+    /* 🎨 FONDO BLANCO PURO para que la tarjeta resalte sobre el fondo de sección gris claro */
     background-color: var(--color-light); 
-    /* Aseguramos que el texto dentro de las tarjetas VUELVA a ser oscuro (sin cambios) */
-    color: #333; 
+    color: #333; /* Texto oscuro */
     box-shadow: var(--shadow-light);
     border-left: 5px solid var(--color-primary); 
     transition: transform 0.2s;
 }
-/* Aseguramos que los títulos dentro de las tarjetas sean oscuros (Azul Primario) (sin cambios) */
+/* Aseguramos que los títulos dentro de las tarjetas sean oscuros (Azul Primario) */
 .data-card h2, .data-card h3 {
     color: var(--color-primary); 
 }
@@ -266,11 +258,9 @@ h1, h2, h3 {
 .data-table tr,
 .data-table td,
 .data-table th {
-    /* ⬅️ CAMBIO: Fondo BLANCO SÓLIDO (ya no semitransparente) */
+    /* 🎨 FONDO BLANCO PURO para que la tabla resalte */
     background-color: var(--color-light);
-    /* Asegurar que el color del texto sea oscuro para contraste (sin cambios) */
-    color: #333;
-    /* Hacer el borde semitransparente o sólido si se desea (sin cambios) */
+    color: #333; /* Texto oscuro */
     border-color: rgba(0, 0, 0, 0.2); 
 }
 
