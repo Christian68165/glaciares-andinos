@@ -1,79 +1,71 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8" />
-    <title>Glaciares Andinos: Reporte Histórico de Datos</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="utf-8" />
+    <title>Glaciares Andinos: Reporte Histórico de Datos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <video autoplay muted loop id="video-bg-global">
-        <source src="https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/videos%20huayna%20potosi/13733128_3840_2160_60fps.mp4?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ2aWRlb3MgaHVheW5hIHBvdG9zaS8xMzczMzEyOF8zODQwXzIxNjBfNjBmcHMubXA0IiwiaWF0IjoxNzYzMDAyMjk4LCJleHAiOjE3OTQ1MzgyOTh9.Kg-t9yIrz_O2oHdvYPNo0hCWub65b9gEbk0Eni5a4VU" type="video/mp4">
-        Tu navegador no soporta el video.
-    </video>
+        <header id="navbar">
+        <div class="logo">
+            <a href="index.html">Glaciares Andinos 🏔️</a> 
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="mapa.html">Mapa Interactivo 🗺</a></li> 
+                <li><a href="simulacion.html">Simulación de Deshielo 🧊</a></li>
+                <li class="active"><a href="datos.html">Datos y Deshielo</a></li> 
+                <li><a href="impacto.html">Impacto Ambiental</a></li>
+                <li><a href="proyectos.html">Proyectos</a></li>
+                <li><a href="index.html#galeria">Galería</a></li>
+                <li><a href="index.html#conclusiones">Contacto</a></li>
+            </ul>
+        </nav>
+        <button class="menu-toggle">☰</button>
+    </header>
 
+    <section id="datos-historicos" class="section">
+        <h2>📖 Datos y Deshielo Histórico</h2>
+        <p>A continuación, se presenta el reporte interactivo que resume la evolución histórica del área, volumen y factores climatológicos de los glaciares Chacaltaya y Huayna Potosí. Debido a restricciones de seguridad, es posible que se requiera **iniciar sesión con una cuenta de organización** para visualizar el informe completo.</p>
 
-    <header id="navbar">
-        <div class="logo">
-            <a href="index.html">Glaciares Andinos 🏔️</a> 
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="mapa.html">Mapa Interactivo 🗺</a></li> 
-                <li><a href="simulacion.html">Simulación de Deshielo 🧊</a></li>
-                <li class="active"><a href="datos.html">Datos y Deshielo</a></li> 
-                <li><a href="impacto.html">Impacto Ambiental</a></li>
-                <li><a href="proyectos.html">Proyectos</a></li>
-                <li><a href="index.html#galeria">Galería</a></li>
-                <li><a href="index.html#conclusiones">Contacto</a></li>
-            </ul>
-        </nav>
-        <button class="menu-toggle">☰</button>
-    </header>
+        <hr style="margin: 30px 0; border-color: #ddd;">
 
-    <section id="datos-historicos" class="section">
-        <h2>📖 Datos y Deshielo Histórico</h2>
-        <p>A continuación, se presenta el reporte interactivo que resume la evolución histórica del área, volumen y factores climatológicos de los glaciares Chacaltaya y Huayna Potosí. Debido a restricciones de seguridad, es posible que se requiera **iniciar sesión con una cuenta de organización** para visualizar el informe completo.</p>
-
-        <hr style="margin: 30px 0; border-color: #ddd;">
-
-        <div id="reportContainer" class="data-section-container" style="margin-top: 20px;">
-            <h3>Reporte Interactivo de Reducción Glaciar</h3>
-            
-            <div class="powerbi-container">
-                <iframe 
-                    id="powerBiIframe"
-                    title="Reporte de Glaciares" 
-                    width="100%" 
-                    height="100%"
-                    src="https://app.powerbi.com/reportEmbed?reportId=8be72636-b731-43d8-9218-3b8d1bdaea38&autoAuth=true&ctid=fd6667da-eb0e-4d20-9c88-c20cd77438f6" 
-                    frameborder="0" 
-                    allowFullScreen="true">
-                </iframe>
-            </div>
-        </div>
-    </section>
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const menuToggle = document.querySelector('.menu-toggle');
-                const nav = document.querySelector('#navbar nav');
-        
-                if (menuToggle && nav) {
-                    menuToggle.addEventListener('click', () => {
-                        // Alterna la clase 'nav-open' en el contenedor <nav>
-                        nav.classList.toggle('nav-open');
-                    });
-                }
-            });
-        </script>
-    </body>
+        <div id="reportContainer" class="data-section-container" style="margin-top: 20px;">
+            <h3>Reporte Interactivo de Reducción Glaciar</h3>
+            
+            <div class="powerbi-container">
+                <iframe 
+                    id="powerBiIframe"
+                    title="Reporte de Glaciares" 
+                    width="100%" 
+                    height="100%"
+                    src="https://app.powerbi.com/reportEmbed?reportId=8be72636-b731-43d8-9218-3b8d1bdaea38&autoAuth=true&ctid=fd6667da-eb0e-4d20-9c88-c20cd77438f6" 
+                    frameborder="0" 
+                    allowFullScreen="true">
+                </iframe>
+            </div>
+        </div>
+    </section>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const menuToggle = document.querySelector('.menu-toggle');
+                const nav = document.querySelector('#navbar nav');
+        
+                if (menuToggle && nav) {
+                    menuToggle.addEventListener('click', () => {
+                        // Alterna la clase 'nav-open' en el contenedor <nav>
+                        nav.classList.toggle('nav-open');
+                    });
+                }
+            });
+        </script>
+    </body>
 
 </html>
-
-
