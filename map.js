@@ -53,7 +53,7 @@ const FOTOS_PASIVOS_GENERICAS = [
 
 // Capas de Vistas de Supabase (las que ya tenías)
 const CAPAS = [
-    { vista: 'vw_laguna_wgs84', idBase: 'lagunas', color: '#1E90FF', extrusionHeight: 10, is3D: true }, 
+    { vista: 'vw_laguna_wgs84', idBase: 'lagunas', color: '#1E90FF', extrusionHeight: 10, is3D: false }, 
     { vista: 'vw_zonaturistica_wgs84', idBase: 'zonas_turisticas', color: '#FFD700', extrusionHeight: 0, is3D: false }, 
     { vista: 'vw_pasivominero_wgs84', idBase: 'pasivos_mineros', color: '#8B0000', extrusionHeight: 0, is3D: false }, 
     { vista: 'vw_areaminera_wgs84', idBase: 'areas_mineras', color: '#00FF7F', extrusionHeight: 0, is3D: false } 
@@ -548,6 +548,7 @@ map.on('load', () => {
 
     setTimeout(() => setLegendStatus(''), 5000);
 });
+
 
 
 
