@@ -536,3 +536,4 @@ map.on('load', () => {
 });
 // -----------------------------------------------------------------------------------------
 // NOTA: El código de scroll u otros scripts de soporte deben estar fuera de map.js o ser gestionados aparte.
+
