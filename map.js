@@ -103,7 +103,7 @@ function generatePopupHTML(props, vista) {
         if (property === 'area' || property === 'extension') {
             // Asegura que el valor sea un número antes de toFixed
             const num = parseFloat(value);
-            return isNaN(num) ? value : ${num.toFixed(2)} km²;
+           return isNaN(num) ? value : `${num.toFixed(2)} km²`; // <--- ¡Acentos graves añadidos!
         }
         return value;
     };
@@ -536,3 +536,4 @@ map.on('load', () => {
 });
 // -----------------------------------------------------------------------------------------
 // NOTA: El código de scroll u otros scripts de soporte deben estar fuera de map.js o ser gestionados aparte.
+
