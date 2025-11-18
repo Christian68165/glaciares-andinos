@@ -200,6 +200,29 @@ h1, h2, h3 {
 #sidebar h2, #sidebar h3 {
     color: var(--color-primary); 
 }
+
+/* Estilos para limpiar el enlace "Explora el Mapa" y convertirlo en un título */
+.btn {
+    /* 1. LIMPIEZA DE ESTILOS NO DESEADOS */
+    text-decoration: none !important; /* Elimina la línea doble morada */
+    background: none !important;      /* Elimina cualquier fondo de botón */
+    border: none !important;          /* Elimina bordes (si los hubiera) */
+    cursor: default;                  /* Quita el cursor de 'mano' si es un título */
+    padding: 0 !important;            /* Elimina el padding indeseado de un botón */
+    
+    /* 2. ESTILO DE TÍTULO CLARO Y FUERTE */
+    color: #FFFFFF !important;        /* Texto blanco o del color de tu encabezado */
+    font-size: 1.5em;                 /* Fuente grande */
+    font-weight: 700;                 /* En negrita */
+    
+    /* 3. ESPACIADO Y SEPARACIÓN */
+    display: block;                   /* Asegura que el margin y padding funcionen bien */
+    margin: 15px 0 10px 0;            /* Espacio superior e inferior */
+    
+    /* Opcional: una línea sutil de separación */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3); /* Línea blanca semitransparente */
+    padding-bottom: 5px; /* Pequeño espacio entre el texto y la línea */
+}
 /* AJUSTE RECOMENDADO: Eliminar posición absoluta en #map y usar height: 100% */
 #map { 
     /* Eliminamos position: absolute; para simplificar la herencia de tamaño */
@@ -399,4 +422,5 @@ h1, h2, h3 {
     }
 }
 /* ======================================================= */
+
 
