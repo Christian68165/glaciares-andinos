@@ -380,12 +380,17 @@ h1, h2, h3 {
     #navbar nav ul {
         flex-direction: column; 
         padding: 20px 0;
+        /* 🛑 AGREGAR: Alinea los elementos internos a la izquierda */
+        align-items: flex-start;
     }
     
     #navbar nav ul li {
         margin: 0;
-        text-align: center;
+        /* 🛑 CAMBIAR: Forzar la alineación del texto a la izquierda */
+        text-align: left;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+        /* 🛑 AGREGAR: Asegura que ocupe todo el ancho para que el clic funcione bien */
+        width: 100%;
     }
     
     #navbar nav ul li a {
@@ -419,6 +424,7 @@ h1, h2, h3 {
     }
 }
 /* ======================================================= */
+
 
 
 
