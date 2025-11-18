@@ -17,10 +17,10 @@ const GEOJSON_LAYERS = {
         color: "#B22222", 
         tipo: "punto"
     },
-    "Cabañas y Refugios": {
-        url: "URL_STORAGE_REFUGIOS", 
+    "Rios Secundarios": {
+        url: "https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/mapas/rios_secu_final.geojson?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJtYXBhcy9yaW9zX3NlY3VfZmluYWwuZ2VvanNvbiIsImlhdCI6MTc2MzQyNzE4MCwiZXhwIjoxNzk0OTYzMTgwfQ.z86XeErZzAmUfZj9L94DY1ubPi5pnR81U-Z_V23gA_M", 
         color: "#FFA500", 
-        tipo: "punto"
+        tipo: "polígono"
     },
     "Límites de Cuenca": {
         url: "URL_STORAGE_CUENCA", 
@@ -536,5 +536,6 @@ map.on('load', () => {
 });
 // -----------------------------------------------------------------------------------------
 // NOTA: El código de scroll u otros scripts de soporte deben estar fuera de map.js o ser gestionados aparte.
+
 
 
