@@ -12,10 +12,10 @@ const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 
 const GEOJSON_LAYERS = {
     // ❗ REEMPLAZA LAS URLs con las rutas reales de tu Supabase Storage
-    "Glaciar Línea de Crecida": {
-        url: "URL_STORAGE_GLACIAR_LINEA", 
+    "Represas": {
+        url: "https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/mapas/represas.geojson?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJtYXBhcy9yZXByZXNhcy5nZW9qc29uIiwiaWF0IjoxNzYzNDI1MjM1LCJleHAiOjE3OTQ5NjEyMzV9.FWGwbTlm6vayokRYfAH8Akob7nHSedJPxXHO_o27CWk", 
         color: "#B22222", 
-        tipo: "línea"
+        tipo: "punto"
     },
     "Cabañas y Refugios": {
         url: "URL_STORAGE_REFUGIOS", 
@@ -536,4 +536,5 @@ map.on('load', () => {
 });
 // -----------------------------------------------------------------------------------------
 // NOTA: El código de scroll u otros scripts de soporte deben estar fuera de map.js o ser gestionados aparte.
+
 
