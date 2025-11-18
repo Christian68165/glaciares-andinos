@@ -513,28 +513,37 @@ function setupCheckboxHandlers() {
 
 // ************ INICIALIZACIÓN DEL MAPA ************
 map.on('load', () => {
-    
-    setLegendStatus('Iniciando carga de capas...');
-    
-    // 1. IMPLEMENTACIÓN DE TERRENO 3D y FONDO (Mantenido)
-    map.addSource('mapbox-dem', {
-      'type': 'raster-dem',
-      'url': 'mapbox://mapbox.mapbox-terrain-dem-v1',
-      'tileSize': 512,
-      'maxzoom': 14
-    });
-    
-    map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.0 });
-    map.setFog({}); 
 
-    map.addLayer({
-        'id': 'sky',
-        'type': 'sky',
-        'paint': {
-            'sky-type': 'atmosphere',
-            'sky-atmosphere-sun-intensity': 5 
-        }
-    });
+    setLegendStatus('Iniciando carga de capas...');
+
+    // 1. IMPLEMENTACIÓN DE TERRENO 3D y FONDO (Mantenido)
+    map.addSource('mapbox-dem', {
+        'type': 'raster-dem',
+        'url': 'mapbox://mapbox.mapbox-terrain-dem-v1',
+        'tileSize': 512,
+        'maxzoom': 14
+    });
+
+    map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.0 });
+    map.setFog({});
+
+    map.addLayer({
+        'id': 'sky',
+        'type': 'sky',
+        'paint': {
+            'sky-type': 'atmosphere',
+            'sky-atmosphere-sun-intensity': 5
+        }
+    });
+
+    // 🔥 Eliminar edificios 3D del estilo (evita las barras verticales)
+    const layers = map.getStyle().layers;
+    for (const layer of layers) {
+        if (layer.id.includes('building')) {
+            map.removeLayer(layer.id);
+        }
+    }
+
     
     // 2. Carga de las vistas de Supabase (Mantenido)
     setupCheckboxHandlers();
@@ -548,6 +557,7 @@ map.on('load', () => {
 
     setTimeout(() => setLegendStatus(''), 5000);
 });
+
 
 
 
