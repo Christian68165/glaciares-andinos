@@ -524,7 +524,7 @@ map.on('load', () => {
       'maxzoom': 14
     });
     
-    map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.5 });
+    map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.0 });
     map.setFog({}); 
 
     map.addLayer({
@@ -548,5 +548,6 @@ map.on('load', () => {
 
     setTimeout(() => setLegendStatus(''), 5000);
 });
+
 
 
