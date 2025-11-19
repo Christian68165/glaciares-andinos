@@ -241,6 +241,68 @@ h1, h2, h3 {
 .legend label { flex:1; user-select:none; cursor:pointer; font-weight: 500; }
 .loading { font-size:12px; color:#666; margin-top: 15px; }
 
+
+/* ================================== */
+/* 5.1 ESTILOS MEJORADOS DE LA LEYENDA (PILAS/TOGGLES) */
+/* ================================== */
+
+/* 1. Ocultar el checkbox nativo */
+.legend input[type="checkbox"] {
+    display: none;
+}
+
+/* 2. Estilo base de la etiqueta (Label) - La 'Píldora' inactiva */
+.legend label {
+    flex: 1;
+    user-select: none;
+    cursor: pointer;
+    font-weight: 500;
+    
+    /* Diseño de la Píldora */
+    background-color: #f0f0f0; /* Fondo inactivo gris claro */
+    color: var(--color-text); /* Texto oscuro por defecto */
+    padding: 8px 15px;
+    border-radius: 20px; /* Bordes redondeados */
+    margin: 5px 0; /* Espacio vertical */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+/* 3. Estilo de la etiqueta cuando está ACTIVA (checkbox marcado) */
+/* Usamos el selector de adyacencia '+' para detectar el estado del input */
+.legend input[type="checkbox"]:checked + label {
+    /* Color de fondo: Usamos el color de acento o un color llamativo */
+    background-color: var(--color-primary); /* Fondo Azul Profundo (para contraste) */
+    color: var(--color-light); /* Texto blanco */
+    box-shadow: var(--shadow-heavy);
+    transform: translateY(-2px);
+}
+
+/* 4. Opcional: Estilo del pequeño cuadrado de color */
+/* Mantenemos el swatch, pero lo ajustamos al nuevo diseño */
+.legend .swatch {
+    width: 12px; 
+    height: 12px; 
+    border-radius: 50%; /* Lo hacemos redondo */
+    margin-right: 10px; 
+    border: 1px solid #FFF; /* Borde blanco para que se vea sobre el fondo azul */
+    transition: all 0.3s ease;
+}
+
+/* Aseguramos que la fila tenga el estilo de pila */
+.legend .row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 5px 0; /* Un poco de padding */
+}
+
+/* Hacemos que el swatch cambie a blanco cuando el botón está activo */
+.legend input[type="checkbox"]:checked + label + .swatch {
+    border-color: var(--color-accent);
+}
+
 /* ================================== */
 /* 6. SECCIONES DE CONTENIDO / DASHBOARD AREA */
 /* ================================== */
@@ -424,6 +486,7 @@ h1, h2, h3 {
     }
 }
 /* ======================================================= */
+
 
 
 
