@@ -486,6 +486,66 @@ h1, h2, h3 {
     }
 }
 /* ======================================================= */
+/* ESTILOS ESPECÍFICOS PARA DISPOSITIVOS MÓVILES Y LEYENDA */
+/* ======================================================= */
+
+/* 1. Botón de control de Leyenda (Hamburguesa) */
+#legend-toggle-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 10; /* Asegura que esté sobre el mapa */
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: var(--color-primary, #007bff); /* Usa tu color principal */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: none; /* Ocultar por defecto, se muestra en media query */
+}
+
+/* 2. Media Query para Móviles */
+@media (max-width: 768px) {
+    
+    /* Mostrar el botón de la leyenda */
+    #legend-toggle-btn {
+        display: block; 
+    }
+    
+    /* Ocultar la barra lateral por defecto y posicionarla */
+    #sidebar {
+        /* Fija la barra lateral en la esquina superior izquierda */
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100vh; /* Ocupa toda la altura de la pantalla */
+        max-width: 80%; /* Máximo el 80% del ancho */
+        width: 300px;
+        z-index: 11; /* Mayor que el botón y el mapa */
+        padding: 20px;
+        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5);
+        
+        /* Transición y estado inicial: fuera de la pantalla */
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        overflow-y: auto; /* Permite desplazamiento si la leyenda es muy larga */
+    }
+
+    /* Estado ACTIVO: la barra lateral se mueve a la vista */
+    #sidebar.open {
+        transform: translateX(0);
+    }
+    
+    /* Asegura que el mapa ocupe todo el espacio */
+    #map-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+}
+
 
 
 
