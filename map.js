@@ -581,6 +581,37 @@ map.on('load', () => {
     setTimeout(() => setLegendStatus(''), 5000);
 });
 
+// ===========================================
+// FUNCIONALIDAD DE MENÚ HAMBURGUESA PARA MÓVILES
+// ===========================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleBtn = document.getElementById('legend-toggle-btn');
+    const sidebar = document.getElementById('sidebar');
+
+    if (toggleBtn && sidebar) {
+        toggleBtn.addEventListener('click', () => {
+            // Alterna la clase 'open' para mostrar/ocultar la barra lateral
+            sidebar.classList.toggle('open');
+            
+            // Opcional: Cambiar el texto del botón al abrir/cerrar
+            if (sidebar.classList.contains('open')) {
+                toggleBtn.textContent = 'Cerrar X';
+            } else {
+                toggleBtn.textContent = 'Capas ☰';
+            }
+        });
+        
+        // Cierra la leyenda si el usuario hace clic en el mapa mientras la leyenda está abierta
+        document.getElementById('map').addEventListener('click', () => {
+            if (sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+                toggleBtn.textContent = 'Capas ☰';
+            }
+        });
+    }
+});
+
 
 
 
