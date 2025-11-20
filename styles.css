@@ -481,69 +481,73 @@ h1, h2, h3 {
 
 /* 1. Botón de control de Leyenda (Hamburguesa) - AJUSTE Z-INDEX */
 #legend-toggle-btn {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    z-index: 1000; /* 🚀 SUBIMOS Z-INDEX para asegurar visibilidad sobre el mapa */
-    padding: 10px 15px;
-    font-size: 16px;
-    background-color: var(--color-primary, #007bff); 
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    display: none; 
+    position: absolute;
+    top: 15px; /* Propiedad de escritorio/base */
+    left: 15px; /* Propiedad de escritorio/base */
+    z-index: 1000;
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: var(--color-primary, #007bff); 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: none; 
 }
 
-/* 2. Media Query para Móviles - OPTIMIZADA */
+/* 2. Media Query para Móviles - OPTIMIZADA Y CORREGIDA */
 @media (max-width: 768px) {
-    
-    /* 🛑 NUEVO: Cambia el layout general del mapa para móvil */
-    #mapa-interactivo {
-        display: block; /* Anula el 'display: flex' de escritorio */
-        /* Ajusta la altura para considerar el navbar móvil (60px) */
-        height: calc(100vh - 60px);
-        margin-top: 60px;
-    }
+    
+    /* 🛑 NUEVO: Cambia el layout general del mapa para móvil */
+    #mapa-interactivo {
+        display: block;
+        height: calc(100vh - 60px);
+        margin-top: 60px;
+    }
 
-    /* Mostrar el botón de la leyenda */
-    #legend-toggle-btn {
-        display: block; 
-        z-index: 1001; /* Asegurar que esté encima del sidebar (z-index 999) */
-    }
-    
-    /* Ocultar la barra lateral por defecto y posicionarla */
-    #sidebar {
-        /* Fija la barra lateral en la esquina superior izquierda */
-        position: absolute;
-        top: 0;
-        left: 0;
-        /* Usar 100% en lugar de 100vh si #mapa-interactivo tiene la altura definida */
-        height: 100%; 
-        max-width: 80%; 
-        width: 300px;
-        z-index: 999; 
-        padding: 20px;
-        background-color: var(--color-light); /* Asegurar color de fondo */
-        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5);
+    /* Mostrar el botón de la leyenda y reubicarlo */
+    #legend-toggle-btn {
+        display: block; 
+        z-index: 1001; 
         
-        transform: translateX(-100%);
-        transition: transform 0.3s ease-in-out;
-        overflow-y: auto; 
-    }
+        /* 🚀 CORRECCIÓN CLAVE: Mover a la esquina inferior derecha */
+        top: auto; /* Desactiva la posición superior heredada */
+        left: auto; /* Desactiva la posición izquierda heredada */
+        bottom: 15px; /* Fija a 15px del borde inferior */
+        right: 15px; /* Fija a 15px del borde derecho */
+    }
+    
+    /* Ocultar la barra lateral por defecto y posicionarla */
+    #sidebar {
+        /* Fija la barra lateral en la esquina superior izquierda */
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%; 
+        max-width: 80%; 
+        width: 300px;
+        z-index: 999; 
+        padding: 20px;
+        background-color: var(--color-light); 
+        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5);
+        
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        overflow-y: auto; 
+    }
 
-    /* Estado ACTIVO: la barra lateral se mueve a la vista */
-    #sidebar.open {
-        transform: translateX(0);
-    }
-    
-    /* Asegura que el mapa ocupe todo el espacio */
-    #map-container {
-        width: 100%;
-        height: 100%; /* Ocupa todo el alto de #mapa-interactivo */
-        position: relative;
-    }
+    /* Estado ACTIVO: la barra lateral se mueve a la vista */
+    #sidebar.open {
+        transform: translateX(0);
+    }
+    
+    /* Asegura que el mapa ocupe todo el espacio */
+    #map-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
 }
 
 
