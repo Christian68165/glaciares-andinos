@@ -590,7 +590,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const sidebar = document.getElementById('sidebar');
 
     if (toggleBtn && sidebar) {
-        toggleBtn.addEventListener('click', () => {
+        
+        // 1. Lógica del Botón (Abrir y Cerrar)
+        toggleBtn.addEventListener('click', (event) => {
+            
+            // 🛑 ¡ESTA ES LA LÍNEA CRÍTICA QUE FALTABA! 🛑
+            event.stopPropagation(); 
+            
             // Alterna la clase 'open' para mostrar/ocultar la barra lateral
             sidebar.classList.toggle('open');
             
@@ -602,7 +608,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Cierra la leyenda si el usuario hace clic en el mapa mientras la leyenda está abierta
+        // 2. Lógica de Cierre al hacer clic en el mapa (Sin cambios)
         document.getElementById('map').addEventListener('click', () => {
             if (sidebar.classList.contains('open')) {
                 sidebar.classList.remove('open');
