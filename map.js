@@ -17,15 +17,20 @@ const GEOJSON_LAYERS = {
         color: "#B22222", 
         tipo: "punto"
     },
-    "Rios Secundarios": {
+    "Ríos Secundarios": {
         url: "https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/mapas/rios_secu_final.geojson?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJtYXBhcy9yaW9zX3NlY3VfZmluYWwuZ2VvanNvbiIsImlhdCI6MTc2MzQyNzE4MCwiZXhwIjoxNzk0OTYzMTgwfQ.z86XeErZzAmUfZj9L94DY1ubPi5pnR81U-Z_V23gA_M", 
         color: "#FFA500", 
         tipo: "línea"
     },
-    "Límites de Cuenca": {
-        url: "URL_STORAGE_CUENCA", 
+    "MicroCuencas": {
+        url: "https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/mapas/MicroCuencas.geojson?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJtYXBhcy9NaWNyb0N1ZW5jYXMuZ2VvanNvbiIsImlhdCI6MTc2MzY3MDI3MiwiZXhwIjoxNzk1MjA2MjcyfQ.d3mo1PaPRoLRET8OCfZNKENdJUhnaC_QAsOEmCgR9nQ", 
         color: "#4682B4", 
-        tipo: "polígono"
+        tipo: "línea"
+    },
+    "Ríos": {
+        url: "https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/mapas/Rios.geojson?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJtYXBhcy9SaW9zLmdlb2pzb24iLCJpYXQiOjE3NjM2NzAzMzcsImV4cCI6MTc5NTIwNjMzN30.xfFJFWulaR2LK9iW0PGJpjIpnkWNsUL9W95S1uzb5SI", 
+        color: "#4682B4", 
+        tipo: "línea"
     },
     "Ruta (Huayna Potosí - Chacaltaya)": { // El texto que aparecerá en el menú
         url: "https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/sign/mapas/map%20(1).geojson?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NTk0YzZlZi05NDViLTQzMjEtOGU1NS1kZWEzOWQ4MjExNzgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJtYXBhcy9tYXAgKDEpLmdlb2pzb24iLCJpYXQiOjE3NjMwMTMwMTYsImV4cCI6MTc5NDU0OTAxNn0.AbxjsFzWygHb2eqd0LLrdWqKy6JFCu0Q-rEqQR_F7eE", // ¡Pega la URL aquí!
@@ -557,6 +562,7 @@ map.on('load', () => {
 
     setTimeout(() => setLegendStatus(''), 5000);
 });
+
 
 
 
