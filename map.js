@@ -316,40 +316,58 @@ async function toggleGeoJSONLayer(layerKey, layerConfig, checkbox) {
 }
 
 // Genera los checkboxes de GeoJSON en el sidebar
+// =================================================================
+// 🛑 FUNCIÓN CORREGIDA: Genera la Leyenda GeoJSON y Asigna el Control
+// =================================================================
+
 function setupGeoJSONLayerControls() {
-    const container = document.getElementById('layer-list-container');
-    if (!container) return;
-    container.innerHTML = ''; // Limpiar el estado de carga
+    const container = document.getElementById('layer-list-container');
+    if (!container) return;
+    
+    container.innerHTML = ''; // Limpiar el estado de carga
+    
+    // 1. Recorrer la configuración de las capas GeoJSON
+    Object.keys(GEOJSON_LAYERS).forEach(key => {
+        const config = GEOJSON_LAYERS[key];
+        // Generar un ID limpio y único para el checkbox y la capa de Mapbox
+        const cleanKey = key.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase(); 
+        const layerKey = cleanKey; // ID para la función toggleGeoJSONLayer
+        const checkboxId = `chk_geojson_${cleanKey}`;
 
-    Object.keys(GEOJSON_LAYERS).forEach(key => {
-        const config = GEOJSON_LAYERS[key];
-        const layerKey = key.replace(/\s/g, '-').toLowerCase(); // Ejemplo: glaciar-linea-de-crecida
+        const div = document.createElement('div');
+        div.className = 'row';
 
-        const div = document.createElement('div');
-        div.className = 'row';
+        // INPUT CHECKBOX (CRÍTICO: Debe ir primero)
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = checkboxId;
 
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        // CORREGIDO: Uso de acentos graves
-        checkbox.id = `chk_geojson_${layerKey}`;
+        // LABEL (CRÍTICO: Debe ir segundo para que el CSS funcione)
+        const label = document.createElement('label');
+        label.htmlFor = checkboxId;
+        label.textContent = key;
 
-        const swatch = document.createElement('div');
-        swatch.className = 'swatch';
-        swatch.style.background = config.color;
+        // SWATCH (CRÍTICO: Debe ir tercero)
+        const swatch = document.createElement('div');
+        swatch.className = 'swatch';
+        swatch.style.background = config.color;
 
-        const label = document.createElement('label');
-        label.htmlFor = checkbox.id;
-        label.textContent = key;
+        // 2. Asignación del Listener de Eventos
+        checkbox.addEventListener('change', () => {
+            // El cambio de color de la píldora ocurre automáticamente aquí
+            // (gracias a que el CSS detecta que el INPUT está checked)
+            
+            // Llamar a la lógica de Mapbox
+            toggleGeoJSONLayer(layerKey, config, checkbox);
+        });
 
-        checkbox.addEventListener('change', () => {
-            toggleGeoJSONLayer(layerKey, config, checkbox);
-        });
-
-        div.appendChild(checkbox);
-        div.appendChild(swatch);
-        div.appendChild(label);
-        container.appendChild(div);
-    });
+        // 3. Insertar en el orden correcto: INPUT -> LABEL -> SWATCH
+        div.appendChild(checkbox);
+        div.appendChild(label); // ¡ORDEN CORREGIDO!
+        div.appendChild(swatch);
+        
+        container.appendChild(div);
+    });
 }
 
 
@@ -562,6 +580,7 @@ map.on('load', () => {
 
     setTimeout(() => setLegendStatus(''), 5000);
 });
+
 
 
 
