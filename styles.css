@@ -411,7 +411,7 @@ h1, h2, h3 {
 }
 
 /* ================================== */
-/* 7. RESPONSIVE (AJUSTE DEL MENÚ MÓVIL) */
+/* 7. RESPONSIVE (AJUSTE DEL MENÚ MÓVIL) - CORREGIDO */
 /* ================================== */
 @media (max-width: 900px) {
     #navbar { 
@@ -442,16 +442,13 @@ h1, h2, h3 {
     #navbar nav ul {
         flex-direction: column; 
         padding: 20px 0;
-        /* 🛑 AGREGAR: Alinea los elementos internos a la izquierda */
         align-items: flex-start;
     }
     
     #navbar nav ul li {
         margin: 0;
-        /* 🛑 CAMBIAR: Forzar la alineación del texto a la izquierda */
         text-align: left;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
-        /* 🛑 AGREGAR: Asegura que ocupe todo el ancho para que el clic funcione bien */
         width: 100%;
     }
     
@@ -468,19 +465,12 @@ h1, h2, h3 {
     .section { 
         padding: 80px 5% 40px 5%; 
     }
-    #mapa-interactivo {
-        flex-direction: column; 
-    }
-    #sidebar {
-        width: 100%;
-        height: auto; 
-        position: static;
-        top: auto;
-        padding-bottom: 30px;
-    }
-    #map-container {
-        height: 60vh; 
-    }
+    
+    /* 🛑 REGLAS DE MAPA ELIMINADAS DE AQUÍ PARA EVITAR CONFLICTOS 🛑
+       Las reglas de #mapa-interactivo, #sidebar y #map-container
+       se moverán y ajustarán SOLAMENTE en el bloque de 768px.
+    */
+    
     #home h1 { 
         font-size: 2.2rem; 
     }
@@ -489,29 +479,38 @@ h1, h2, h3 {
 /* ESTILOS ESPECÍFICOS PARA DISPOSITIVOS MÓVILES Y LEYENDA */
 /* ======================================================= */
 
-/* 1. Botón de control de Leyenda (Hamburguesa) */
+/* 1. Botón de control de Leyenda (Hamburguesa) - AJUSTE Z-INDEX */
 #legend-toggle-btn {
     position: absolute;
     top: 15px;
     left: 15px;
-    z-index: 10; /* Asegura que esté sobre el mapa */
+    z-index: 1000; /* 🚀 SUBIMOS Z-INDEX para asegurar visibilidad sobre el mapa */
     padding: 10px 15px;
     font-size: 16px;
-    background-color: var(--color-primary, #007bff); /* Usa tu color principal */
+    background-color: var(--color-primary, #007bff); 
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    display: none; /* Ocultar por defecto, se muestra en media query */
+    display: none; 
 }
 
-/* 2. Media Query para Móviles */
+/* 2. Media Query para Móviles - OPTIMIZADA */
 @media (max-width: 768px) {
     
+    /* 🛑 NUEVO: Cambia el layout general del mapa para móvil */
+    #mapa-interactivo {
+        display: block; /* Anula el 'display: flex' de escritorio */
+        /* Ajusta la altura para considerar el navbar móvil (60px) */
+        height: calc(100vh - 60px);
+        margin-top: 60px;
+    }
+
     /* Mostrar el botón de la leyenda */
     #legend-toggle-btn {
         display: block; 
+        z-index: 1001; /* Asegurar que esté encima del sidebar (z-index 999) */
     }
     
     /* Ocultar la barra lateral por defecto y posicionarla */
@@ -520,17 +519,18 @@ h1, h2, h3 {
         position: absolute;
         top: 0;
         left: 0;
-        height: 100vh; /* Ocupa toda la altura de la pantalla */
-        max-width: 80%; /* Máximo el 80% del ancho */
+        /* Usar 100% en lugar de 100vh si #mapa-interactivo tiene la altura definida */
+        height: 100%; 
+        max-width: 80%; 
         width: 300px;
-        z-index: 11; /* Mayor que el botón y el mapa */
+        z-index: 999; 
         padding: 20px;
+        background-color: var(--color-light); /* Asegurar color de fondo */
         box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5);
         
-        /* Transición y estado inicial: fuera de la pantalla */
         transform: translateX(-100%);
         transition: transform 0.3s ease-in-out;
-        overflow-y: auto; /* Permite desplazamiento si la leyenda es muy larga */
+        overflow-y: auto; 
     }
 
     /* Estado ACTIVO: la barra lateral se mueve a la vista */
@@ -541,10 +541,11 @@ h1, h2, h3 {
     /* Asegura que el mapa ocupe todo el espacio */
     #map-container {
         width: 100%;
-        height: 100%;
+        height: 100%; /* Ocupa todo el alto de #mapa-interactivo */
         position: relative;
     }
 }
+
 
 
 
