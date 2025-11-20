@@ -588,19 +588,20 @@ map.on('load', () => {
 document.addEventListener('DOMContentLoaded', function() {
     const toggleBtn = document.getElementById('legend-toggle-btn');
     const sidebar = document.getElementById('sidebar');
+    const mapElement = document.getElementById('map'); // Usamos mapElement para claridad
 
-    if (toggleBtn && sidebar) {
+    if (toggleBtn && sidebar && mapElement) {
         
         // 1. Lógica del Botón (Abrir y Cerrar)
-        toggleBtn.addEventListener('click', (event) => {
-            
-            // 🛑 ¡ESTA ES LA LÍNEA CRÍTICA QUE FALTABA! 🛑
+        // Usamos 'pointerdown' en lugar de 'click' para evitar que Mapbox lo absorba.
+        toggleBtn.addEventListener('pointerdown', (event) => {
+            // CRÍTICO: Detiene la propagación para que el mapa no detecte el clic del botón
             event.stopPropagation(); 
             
-            // Alterna la clase 'open' para mostrar/ocultar la barra lateral
+            // Alterna la clase 'open'
             sidebar.classList.toggle('open');
             
-            // Opcional: Cambiar el texto del botón al abrir/cerrar
+            // Cambiar el texto del botón al abrir/cerrar
             if (sidebar.classList.contains('open')) {
                 toggleBtn.textContent = 'Cerrar X';
             } else {
@@ -608,8 +609,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // 2. Lógica de Cierre al hacer clic en el mapa (Sin cambios)
-        document.getElementById('map').addEventListener('click', () => {
+        // 2. Lógica de Cierre al hacer clic en el mapa
+        // Usamos 'click' para detectar un clic en cualquier otra área del mapa
+        mapElement.addEventListener('click', () => {
+            // Solo cierra si está abierta
             if (sidebar.classList.contains('open')) {
                 sidebar.classList.remove('open');
                 toggleBtn.textContent = 'Capas ☰';
@@ -617,6 +620,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
 
 
 
