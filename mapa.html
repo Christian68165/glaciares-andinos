@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>Mapa Interactivo - Chacaltaya</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,7 +29,7 @@
             <li><a href="impacto.html">Impacto Ambiental</a></li>
             <li><a href="proyectos.html">Proyectos</a></li>
             <li><a href="index.html#galeria">Galería</a></li>
-          
+            
         </ul>
     </nav>
     <button class="menu-toggle">☰</button>
@@ -48,11 +48,31 @@
         
         <div class="legend" id="vistas-legend">
             <h3>Vistas</h3>
-            <div class="row"><input type="checkbox" id="chk_lagunas" checked><div class="swatch" style="background:#1E90FF"></div><label for="chk_lagunas">Lagunas</label></div>
-            <div class="row"><input type="checkbox" id="chk_zonas" checked><div class="swatch" style="background:#FFD700"></div><label for="chk_zonas">Zonas Turísticas</label></div>
-            <div class="row"><input type="checkbox" id="chk_pasivos" checked><div class="swatch" style="background:#8B0000"></div><label for="chk_pasivos">Pasivos Mineros</label></div>
-            <div class="row"><input type="checkbox" id="chk_areas" checked><div class="swatch" style="background:#00FF7F"></div><label for="chk_areas">Áreas Mineras</label></div>
-        </div>
+            
+            <div class="row">
+                <input type="checkbox" id="chk_lagunas" data-vista="vw_laguna_wgs84">
+                <label for="chk_lagunas">Lagunas</label>
+                <div class="swatch" style="background:#1E90FF"></div>
+            </div>
+            
+            <div class="row">
+                <input type="checkbox" id="chk_zonas" data-vista="vw_zonaturistica_wgs84">
+                <label for="chk_zonas">Zonas Turísticas</label>
+                <div class="swatch" style="background:#FFD700"></div>
+            </div>
+            
+            <div class="row">
+                <input type="checkbox" id="chk_pasivos" data-vista="vw_pasivominero_wgs84">
+                <label for="chk_pasivos">Pasivos Mineros</label>
+                <div class="swatch" style="background:#8B0000"></div>
+            </div>
+            
+            <div class="row">
+                <input type="checkbox" id="chk_areas" data-vista="vw_areaminera_wgs84">
+                <label for="chk_areas">Áreas Mineras</label>
+                <div class="swatch" style="background:#00FF7F"></div>
+            </div>
+            </div>
 
         <div class="legend" id="geojson-legend" style="margin-top: 25px;">
             <h3>Mapas</h3>
@@ -88,7 +108,3 @@
 </body>
 
 </html>
-
-
-
-
