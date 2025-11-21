@@ -479,21 +479,23 @@ h1, h2, h3 {
 /* ESTILOS ESPECÍFICOS PARA DISPOSITIVOS MÓVILES Y LEYENDA */
 /* ======================================================= */
 
-/* 1. Botón de control de Leyenda (Hamburguesa) - AJUSTE Z-INDEX */
+/* 1. Botón de control de Leyenda (Hamburguesa) - AJUSTE Z-INDEX - CORREGIDO */
 #legend-toggle-btn {
-    position: absolute;
-    top: 15px; /* Propiedad de escritorio/base */
-    left: 15px; /* Propiedad de escritorio/base */
-    z-index: 1000;
-    padding: 10px 15px;
-    font-size: 16px;
-    background-color: var(--color-primary, #007bff); 
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    display: none; 
+    position: absolute;
+    top: 15px; /* Propiedad de escritorio/base */
+    left: 15px; /* Propiedad de escritorio/base */
+    z-index: 1000;
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: var(--color-primary, #007bff); 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    
+    /* 🛑 CORRECCIÓN CLAVE 1: Forzar ocultación en escritorio */
+    display: none !important; 
 }
 
 /* 2. Media Query para Móviles - CORRECCIÓN DEFINITIVA */
@@ -501,16 +503,17 @@ h1, h2, h3 {
     
     /* 🛑 CAMBIA el LAYOUT GENERAL del mapa para móvil */
     #mapa-interactivo {
-        /* Usamos display: block para apilar elementos y que el mapa ocupe todo */
         display: block; 
         height: calc(100vh - 60px);
         margin-top: 60px;
-        position: relative; /* Necesario para que el sidebar se posicione ABSOLUTELY */
+        /* 🛑 CRÍTICO: Aseguramos el padre para la posición absoluta */
+        position: relative !important; 
     }
 
     /* Mostrar el botón de la leyenda y reubicarlo */
     #legend-toggle-btn {
-        display: block; 
+        /* 🛑 CRÍTICO: Forzar visibilidad en móvil */
+        display: block !important; 
         z-index: 1001; 
         top: auto; 
         left: auto; 
@@ -520,20 +523,20 @@ h1, h2, h3 {
     
     /* 🛑 REGLA CRÍTICA: Ocultar y posicionar la barra lateral (SIDEBAR) */
     #sidebar {
-        /* **SOBREESCRIBE** cualquier position: static de otras media queries */
-        position: absolute; 
+        /* 🛑 CRÍTICO: Forzar posición absoluta */
+        position: absolute !important; 
         top: 0;
         left: 0;
         
-        height: 100%; /* Ocupa 100% de la altura de #mapa-interactivo */
+        height: 100%;
         width: 300px;
         max-width: 80%;
         
-        background-color: var(--color-light); /* Asegurar el fondo para que no sea transparente */
+        background-color: var(--color-light); 
         z-index: 999;
         
-        /* 🛑 CRÍTICO: OCULTAR FUERA DE LA PANTALLA 🛑 */
-        transform: translateX(-100%);
+        /* 🛑 CRÍTICO: OCULTAR FUERA DE LA PANTALLA INICIALMENTE */
+        transform: translateX(-100%) !important; 
         transition: transform 0.3s ease-in-out;
         box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5);
         overflow-y: auto;
@@ -541,16 +544,18 @@ h1, h2, h3 {
 
     /* Estado ACTIVO: la barra lateral se mueve a la vista */
     #sidebar.open {
-        transform: translateX(0);
+        /* 🛑 CRÍTICO: Forzar la apertura */
+        transform: translateX(0) !important; 
     }
     
     /* Asegura que el mapa ocupe todo el espacio */
     #map-container {
         width: 100%;
-        height: 100%; /* Ocupa todo el alto de #mapa-interactivo */
+        height: 100%; 
         position: relative;
     }
 }
+
 
 
 
