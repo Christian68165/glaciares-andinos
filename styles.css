@@ -11,7 +11,10 @@
     --shadow-heavy: 0 4px 12px rgba(0,0,0,0.25);
 }
 
-/* 🛑 REGLA GLOBAL CRÍTICA 1: Box Sizing para manejo de anchos y padding */
+/* ------------------------------------------------ */
+/* ✅ SOLUCIÓN MÓVIL 1: Box-Sizing Global y Reset */
+/* Esta regla es CRÍTICA: asegura que padding y border no sumen ancho extra. */
+/* ------------------------------------------------ */
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -26,22 +29,25 @@ body { 
     background-color: var(--color-primary); 
     color: var(--color-text); 
     scroll-behavior: smooth; 
-    
-    /* 🛑 REGLA CRÍTICA 2: EVITAR SCROLL LATERAL. Asegura que el contenido desbordante se oculte. */
-    overflow-x: hidden; 
-}
 
-/* 🛑 REGLA CRÍTICA 3: Las imágenes y videos NUNCA deben exceder el ancho del contenedor. */
-img, video, iframe, .powerbi-container {
-    max-width: 100%; 
-    height: auto; 
+    /* ✅ SOLUCIÓN MÓVIL 2: Evita el desplazamiento horizontal */
+    overflow-x: hidden;
 }
-
 
 h1, h2, h3 { 
     font-family: 'Montserrat', sans-serif;
     color: var(--color-primary); 
 }
+
+/* ------------------------------------------------ */
+/* ✅ SOLUCIÓN MÓVIL 3: Ajuste de Elementos Multimedia */
+/* Asegura que ninguna imagen/video/iframe exceda el ancho de la pantalla. */
+/* ------------------------------------------------ */
+img, video, iframe, .powerbi-container {
+    max-width: 100%; 
+    height: auto; 
+}
+
 
 /* ================================================= */
 /* ✅ SECCIONES DE CONTENIDO CON FONDO DE IMAGEN Y OVERLAY */
@@ -50,15 +56,16 @@ h1, h2, h3 { 
     /* Claves para el fondo: Posicionamiento y Apilamiento */
     position: relative; 
     overflow: hidden; 
-    z-index: 1; 
+    z-index: 1; /* Asegura que el contenido quede encima del fondo ::before */
     
     padding: 100px 5% 40px 5%; 
     min-height: auto; 
+    box-sizing: border-box;
     scroll-margin-top: 70px;
     
-    background-color: transparent; 
+    background-color: transparent; /* Permite ver el fondo ::before */
     
-    color: var(--color-light); 
+    color: var(--color-light); /* Texto de la sección a blanco */
     border-top: 1px solid rgba(255, 255, 255, 0.2); 
 }
 
@@ -72,24 +79,24 @@ h1, h2, h3 { 
     height: 100%;
     
     /* Imagen y overlay */
-    background-image: linear-gradient(rgba(30, 60, 114, 0.8), rgba(30, 60, 114, 0.8)), 
+    background-image: linear-gradient(rgba(30, 60, 114, 0.8), rgba(30, 60, 114, 0.8)), /* Overlay azul más opaco (80%) */
                       url('https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0013.jpg');
     background-size: cover;
     background-position: center center;
-    background-attachment: fixed; 
-    z-index: -1; 
+    background-attachment: fixed; /* Esto crea el efecto de fondo fijo (Parallax) */
+    z-index: -1; /* Manda el fondo detrás del contenido */
 }
 
 /* Ajuste de colores de texto para el fondo oscuro */
 .section h2 {
     font-size: 2.5rem;
     margin-bottom: 40px;
-    color: var(--color-accent); 
+    color: var(--color-accent); /* Título principal a amarillo */
     border-bottom: 3px solid var(--color-accent);
     padding-bottom: 10px;
 }
 .section h3 {
-    color: var(--color-light); 
+    color: var(--color-light); /* Subtítulos a blanco */
     margin-top: 30px;
 }
 
@@ -210,7 +217,7 @@ h1, h2, h3 { 
 }
 
 /* ================================== */
-/* 5. MAPA INTERACTIVO */
+/* 5. MAPA INTERACTIVO (sin cambios) */
 /* ================================== */
 #mapa-interactivo {
     display: flex;
@@ -234,17 +241,20 @@ h1, h2, h3 { 
 }
 
 
+/* AJUSTE RECOMENDADO: Eliminar posición absoluta en #map y usar height: 100% */
 #map { 
+    /* Eliminamos position: absolute; para simplificar la herencia de tamaño */
     width: 100%;
-    height: 100%; 
+    height: 100%; /* ¡CRÍTICO! Asegura que herede la altura de #map-container */
+    /* top: 0; y bottom: 0; ya no son necesarios */
 }
 
+/* Además, asegúrate que #map-container SÍ tenga position: relative; (ya lo tiene en tu código) */
 #map-container {
     flex-grow: 1; 
-    position: relative; 
+    position: relative; /* Base para la posición absoluta de popups internos de mapbox */
     height: 100%; 
 }
-
 /* Estilos de leyenda (se mantienen los anteriores) */
 .legend { position: static; margin-top: 15px; background: none; padding: 0; box-shadow: none; max-width: none; }
 .legend .row { display:flex; align-items:center; margin-bottom:12px; }
@@ -270,11 +280,11 @@ h1, h2, h3 { 
     font-weight: 500;
     
     /* Diseño de la Píldora */
-    background-color: #f0f0f0; 
-    color: var(--color-text); 
+    background-color: #f0f0f0; /* Fondo inactivo gris claro */
+    color: var(--color-text); /* Texto oscuro por defecto */
     padding: 8px 15px;
-    border-radius: 20px; 
-    margin: 5px 0; 
+    border-radius: 20px; /* Bordes redondeados */
+    margin: 5px 0; /* Espacio vertical */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     text-align: center;
@@ -284,8 +294,8 @@ h1, h2, h3 { 
 /* Usamos el selector de adyacencia '+' para detectar el estado del input */
 .legend input[type="checkbox"]:checked + label {
     /* Color de fondo: Usamos el color de acento o un color llamativo */
-    background-color: var(--color-primary); 
-    color: var(--color-light); 
+    background-color: var(--color-primary); /* Fondo Azul Profundo (para contraste) */
+    color: var(--color-light); /* Texto blanco */
     box-shadow: var(--shadow-heavy);
     transform: translateY(-2px);
 }
@@ -295,9 +305,9 @@ h1, h2, h3 { 
 .legend .swatch {
     width: 12px; 
     height: 12px; 
-    border-radius: 50%; 
+    border-radius: 50%; /* Lo hacemos redondo */
     margin-right: 10px; 
-    border: 1px solid #FFF; 
+    border: 1px solid #FFF; /* Borde blanco para que se vea sobre el fondo azul */
     transition: all 0.3s ease;
 }
 
@@ -306,7 +316,7 @@ h1, h2, h3 { 
     display: flex;
     align-items: center;
     margin-bottom: 5px;
-    padding: 5px 0; 
+    padding: 5px 0; /* Un poco de padding */
 }
 
 /* Hacemos que el swatch cambie a blanco cuando el botón está activo */
@@ -338,8 +348,8 @@ h1, h2, h3 { 
 .data-card {
     padding: 25px;
     border-radius: 12px;
-    background-color: var(--color-light); 
-    color: #333; 
+    background-color: var(--color-light); /* Fondo de tarjeta blanco */
+    color: #333; /* Texto oscuro dentro de la tarjeta */
     box-shadow: var(--shadow-light);
     border-left: 5px solid var(--color-accent); 
     transition: transform 0.2s;
@@ -397,7 +407,7 @@ h1, h2, h3 { 
     border: none;
 }
 
-/* Galería de Fotos y Videos */
+/* Galería de Fotos y Videos (sin cambios) */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -405,7 +415,7 @@ h1, h2, h3 { 
     margin-top: 40px;
 }
 
-/* Aplica los estilos de tamaño y diseño tanto a IMG como a VIDEO */
+/* Aplica los estilos de tamaño y diseño tanto a IMG como a VIDEO (sin cambios) */
 .gallery-grid img,
 .gallery-grid video {
     width: 100%; 
@@ -477,6 +487,11 @@ h1, h2, h3 { 
         padding: 80px 5% 40px 5%; 
     }
     
+    /* 🛑 REGLAS DE MAPA ELIMINADAS DE AQUÍ PARA EVITAR CONFLICTOS 🛑
+       Las reglas de #mapa-interactivo, #sidebar y #map-container
+       se moverán y ajustarán SOLAMENTE en el bloque de 768px.
+    */
+    
     #home h1 { 
         font-size: 2.2rem; 
     }
@@ -489,11 +504,11 @@ h1, h2, h3 { 
 #legend-toggle-btn {
     position: absolute;
     
-    /* ✅ POSICIÓN SUPERIOR IZQUIERDA */
-    top: 15px !important;    
-    left: 15px !important;   
-    right: auto !important;  
-    bottom: auto !important; 
+    /* 🛑 CAMBIO CLAVE: Posicionar arriba y a la izquierda */
+    top: 15px !important;    /* Distancia desde el borde superior */
+    left: 15px !important;   /* Distancia desde el borde izquierdo */
+    right: auto !important;  /* Asegurarse de que no esté anclado a la derecha */
+    bottom: auto !important; /* Asegurarse de que no esté anclado abajo */
 
     z-index: 1000;
     padding: 10px 15px;
@@ -540,7 +555,7 @@ h1, h2, h3 { 
         
         height: 100%;
         width: 300px;
-        max-width: 80%; /* CLAVE: Para que no desborde en pantallas muy pequeñas */
+        max-width: 80%;
         
         background-color: var(--color-light); 
         z-index: 999;
