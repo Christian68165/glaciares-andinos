@@ -496,59 +496,62 @@ h1, h2, h3 {
     display: none; 
 }
 
-/* 2. Media Query para Móviles - OPTIMIZADA Y CORREGIDA */
+/* 2. Media Query para Móviles - CORRECCIÓN DEFINITIVA */
 @media (max-width: 768px) {
-    
-    /* 🛑 NUEVO: Cambia el layout general del mapa para móvil */
-    #mapa-interactivo {
-        display: block;
-        height: calc(100vh - 60px);
-        margin-top: 60px;
-    }
+    
+    /* 🛑 CAMBIA el LAYOUT GENERAL del mapa para móvil */
+    #mapa-interactivo {
+        /* Usamos display: block para apilar elementos y que el mapa ocupe todo */
+        display: block; 
+        height: calc(100vh - 60px);
+        margin-top: 60px;
+        position: relative; /* Necesario para que el sidebar se posicione ABSOLUTELY */
+    }
 
-    /* Mostrar el botón de la leyenda y reubicarlo */
-    #legend-toggle-btn {
-        display: block; 
-        z-index: 1001; 
+    /* Mostrar el botón de la leyenda y reubicarlo */
+    #legend-toggle-btn {
+        display: block; 
+        z-index: 1001; 
+        top: auto; 
+        left: auto; 
+        bottom: 15px; 
+        right: 15px; 
+    }
+    
+    /* 🛑 REGLA CRÍTICA: Ocultar y posicionar la barra lateral (SIDEBAR) */
+    #sidebar {
+        /* **SOBREESCRIBE** cualquier position: static de otras media queries */
+        position: absolute; 
+        top: 0;
+        left: 0;
         
-        /* 🚀 CORRECCIÓN CLAVE: Mover a la esquina inferior derecha */
-        top: auto; /* Desactiva la posición superior heredada */
-        left: auto; /* Desactiva la posición izquierda heredada */
-        bottom: 15px; /* Fija a 15px del borde inferior */
-        right: 15px; /* Fija a 15px del borde derecho */
-    }
-    
-    /* Ocultar la barra lateral por defecto y posicionarla */
-    #sidebar {
-        /* Fija la barra lateral en la esquina superior izquierda */
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%; 
-        max-width: 80%; 
-        width: 300px;
-        z-index: 999; 
-        padding: 20px;
-        background-color: var(--color-light); 
-        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5);
-        
-        transform: translateX(-100%);
-        transition: transform 0.3s ease-in-out;
-        overflow-y: auto; 
-    }
+        height: 100%; /* Ocupa 100% de la altura de #mapa-interactivo */
+        width: 300px;
+        max-width: 80%;
+        
+        background-color: var(--color-light); /* Asegurar el fondo para que no sea transparente */
+        z-index: 999;
+        
+        /* 🛑 CRÍTICO: OCULTAR FUERA DE LA PANTALLA 🛑 */
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5);
+        overflow-y: auto;
+    }
 
-    /* Estado ACTIVO: la barra lateral se mueve a la vista */
-    #sidebar.open {
-        transform: translateX(0);
-    }
-    
-    /* Asegura que el mapa ocupe todo el espacio */
-    #map-container {
-        width: 100%;
-        height: 100%;
-        position: relative;
-    }
+    /* Estado ACTIVO: la barra lateral se mueve a la vista */
+    #sidebar.open {
+        transform: translateX(0);
+    }
+    
+    /* Asegura que el mapa ocupe todo el espacio */
+    #map-container {
+        width: 100%;
+        height: 100%; /* Ocupa todo el alto de #mapa-interactivo */
+        position: relative;
+    }
 }
+
 
 
 
