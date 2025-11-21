@@ -1,239 +1,250 @@
 /* ================================== */
-/* 1. VARIABLES DE DISEÑO     */
+/* 1. VARIABLES DE DISEÑO     */
 /* ================================== */
 :root {
-    --color-primary: #1e3c72; /* Azul profundo (Andino) */
-    --color-accent: #FFD700; /* Dorado/Amarillo (Resalte) */
-    --color-text: #333; /* Texto por defecto a oscuro (legible) */
-    --color-bg: #f4f4f9; /* Gris muy claro (fondo de las tarjetas) */
-    --color-light: #ffffff; /* Blanco puro (para texto y tablas) */
-    --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
-    --shadow-heavy: 0 4px 12px rgba(0,0,0,0.25);
+    --color-primary: #1e3c72; /* Azul profundo (Andino) */
+    --color-accent: #FFD700; /* Dorado/Amarillo (Resalte) */
+    --color-text: #333; /* Texto por defecto a oscuro (legible) */
+    --color-bg: #f4f4f9; /* Gris muy claro (fondo de las tarjetas) */
+    --color-light: #ffffff; /* Blanco puro (para texto y tablas) */
+    --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-heavy: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* 🛑 REGLA GLOBAL CRÍTICA 1: Box Sizing para manejo de anchos y padding */
+*, *::before, *::after {
+    box-sizing: border-box;
 }
 
 /* ================================== */
 /* 2. ESTILOS BASE Y TIPOGRAFÍA */
 /* ================================== */
-body { 
-    margin: 0; 
-    padding: 0; 
-    font-family: 'Roboto', sans-serif;
-    background-color: var(--color-primary); 
-    color: var(--color-text); 
-    scroll-behavior: smooth; 
+body { 
+    margin: 0; 
+    padding: 0; 
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--color-primary); 
+    color: var(--color-text); 
+    scroll-behavior: smooth; 
+    
+    /* 🛑 REGLA CRÍTICA 2: EVITAR SCROLL LATERAL. Asegura que el contenido desbordante se oculte. */
+    overflow-x: hidden; 
 }
 
-h1, h2, h3 { 
-    font-family: 'Montserrat', sans-serif;
-    color: var(--color-primary); 
+/* 🛑 REGLA CRÍTICA 3: Las imágenes y videos NUNCA deben exceder el ancho del contenedor. */
+img, video, iframe, .powerbi-container {
+    max-width: 100%; 
+    height: auto; 
+}
+
+
+h1, h2, h3 { 
+    font-family: 'Montserrat', sans-serif;
+    color: var(--color-primary); 
 }
 
 /* ================================================= */
 /* ✅ SECCIONES DE CONTENIDO CON FONDO DE IMAGEN Y OVERLAY */
 /* ================================================= */
 .section {
-    /* Claves para el fondo: Posicionamiento y Apilamiento */
-    position: relative; 
-    overflow: hidden; 
-    z-index: 1; /* Asegura que el contenido quede encima del fondo ::before */
-    
-    padding: 100px 5% 40px 5%; 
-    min-height: auto; 
-    box-sizing: border-box;
-    scroll-margin-top: 70px;
-    
-    background-color: transparent; /* Permite ver el fondo ::before */
-    
-    color: var(--color-light); /* Texto de la sección a blanco */
-    border-top: 1px solid rgba(255, 255, 255, 0.2); 
+    /* Claves para el fondo: Posicionamiento y Apilamiento */
+    position: relative; 
+    overflow: hidden; 
+    z-index: 1; 
+    
+    padding: 100px 5% 40px 5%; 
+    min-height: auto; 
+    scroll-margin-top: 70px;
+    
+    background-color: transparent; 
+    
+    color: var(--color-light); 
+    border-top: 1px solid rgba(255, 255, 255, 0.2); 
 }
 
 /* 🛑 PSEUDO-ELEMENTO PARA EL FONDO DE IMAGEN FIJO Y EL OVERLAY AZUL OSCURO 🛑 */
 .section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    
-    /* Imagen y overlay */
-    background-image: linear-gradient(rgba(30, 60, 114, 0.8), rgba(30, 60, 114, 0.8)), /* Overlay azul más opaco (80%) */
-                      url('https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0013.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed; /* Esto crea el efecto de fondo fijo (Parallax) */
-    z-index: -1; /* Manda el fondo detrás del contenido */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Imagen y overlay */
+    background-image: linear-gradient(rgba(30, 60, 114, 0.8), rgba(30, 60, 114, 0.8)), 
+                      url('https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0013.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed; 
+    z-index: -1; 
 }
 
 /* Ajuste de colores de texto para el fondo oscuro */
 .section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-    color: var(--color-accent); /* Título principal a amarillo */
-    border-bottom: 3px solid var(--color-accent);
-    padding-bottom: 10px;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: var(--color-accent); 
+    border-bottom: 3px solid var(--color-accent);
+    padding-bottom: 10px;
 }
 .section h3 {
-    color: var(--color-light); /* Subtítulos a blanco */
-    margin-top: 30px;
+    color: var(--color-light); 
+    margin-top: 30px;
 }
 
 /* La portada (home) DEBE tener la altura mínima de la ventana */
 #home {
-    /* El fondo de Home mantiene su definición independiente para un overlay más sutil */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), 
-                      url('https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0013.jpg'); 
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
-    
-    position: relative; 
-    overflow: hidden; 
-    
-    scroll-margin-top: 70px; 
-    padding-top: 150px; 
-    padding-bottom: 80px;
-    min-height: 100vh; 
-    
-    color: white; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    /* El fondo de Home mantiene su definición independiente para un overlay más sutil */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), 
+                      url('https://mrtxcikgockhokbnphrh.supabase.co/storage/v1/object/public/galeria-glaciares/IMG-20251013-WA0013.jpg'); 
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    
+    position: relative; 
+    overflow: hidden; 
+    
+    scroll-margin-top: 70px; 
+    padding-top: 150px; 
+    padding-bottom: 80px;
+    min-height: 100vh; 
+    
+    color: white; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-.btn { 
-    display: inline-block; 
-    padding: 12px 25px; 
-    background-color: var(--color-accent); 
-    color: var(--color-primary); 
-    text-decoration: none; 
-    border-radius: 50px; 
-    margin-top: 20px; 
-    font-weight: 700;
-    transition: background-color 0.3s, transform 0.3s; 
-    box-shadow: var(--shadow-heavy);
-    text-transform: uppercase;
+.btn { 
+    display: inline-block; 
+    padding: 12px 25px; 
+    background-color: var(--color-accent); 
+    color: var(--color-primary); 
+    text-decoration: none; 
+    border-radius: 50px; 
+    margin-top: 20px; 
+    font-weight: 700;
+    transition: background-color 0.3s, transform 0.3s; 
+    box-shadow: var(--shadow-heavy);
+    text-transform: uppercase;
 }
-.btn:hover { 
-    background-color: #e0b400; 
-    transform: translateY(-2px); 
+.btn:hover { 
+    background-color: #e0b400; 
+    transform: translateY(-2px); 
 }
 
 /* ================================== */
 /* 3. HEADER / NAVBAR (Menú Fijo) */
 /* ================================== */
 #navbar {
-    position: sticky; 
-    top: 0;
-    width: 100%;
-    height: 70px; 
-    background-color: var(--color-primary);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 5%;
+    position: sticky; 
+    top: 0;
+    width: 100%;
+    height: 70px; 
+    background-color: var(--color-primary);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
 }
 
 #navbar .logo a {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 1.5rem;
-    color: var(--color-light); 
-    text-decoration: none;
-    transition: color 0.3s;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--color-light); 
+    text-decoration: none;
+    transition: color 0.3s;
 }
 #navbar .logo a:hover {
-    color: var(--color-accent);
+    color: var(--color-accent);
 }
 
 #navbar nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
 }
 
 #navbar nav ul li {
-    margin-left: 30px;
+    margin-left: 30px;
 }
 
 #navbar nav ul li a {
-    color: var(--color-light);
-    text-decoration: none;
-    font-weight: 500;
-    padding: 5px 0;
-    transition: color 0.3s, border-bottom 0.3s;
-    white-space: nowrap; 
+    color: var(--color-light);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 5px 0;
+    transition: color 0.3s, border-bottom 0.3s;
+    white-space: nowrap; 
 }
 
 #navbar nav ul li a:hover {
-    color: var(--color-accent); 
-    border-bottom: 2px solid var(--color-accent);
+    color: var(--color-accent); 
+    border-bottom: 2px solid var(--color-accent);
 }
 
 .menu-toggle {
-    display: none; 
+    display: none; 
 }
 
 /* ================================== */
 /* 4. PORTADA / HOME (Estilos ya definidos) */
 /* ================================== */
 #home h1 {
-    font-size: 3.8rem; 
-    color: var(--color-light); 
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
-    margin-bottom: 0.5rem;
+    font-size: 3.8rem; 
+    color: var(--color-light); 
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+    margin-bottom: 0.5rem;
 }
 #home p {
-    font-size: 1.2rem;
-    max-width: 700px;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    font-size: 1.2rem;
+    max-width: 700px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
 }
 
 /* ================================== */
-/* 5. MAPA INTERACTIVO (sin cambios) */
+/* 5. MAPA INTERACTIVO */
 /* ================================== */
 #mapa-interactivo {
-    display: flex;
-    padding: 0;
-    height: calc(100vh - 70px); 
-    margin-top: 70px; 
+    display: flex;
+    padding: 0;
+    height: calc(100vh - 70px); 
+    margin-top: 70px; 
 }
 #sidebar {
-    width: 300px; 
-    padding: 30px 20px; 
-    background-color: var(--color-light);
-    color: var(--color-primary); 
-    box-shadow: 2px 0 10px rgba(0,0,0,0.15); 
-    position: relative; 
-    height: 100%; 
-    overflow-y: auto;
-    z-index: 10;
+    width: 300px; 
+    padding: 30px 20px; 
+    background-color: var(--color-light);
+    color: var(--color-primary); 
+    box-shadow: 2px 0 10px rgba(0,0,0,0.15); 
+    position: relative; 
+    height: 100%; 
+    overflow-y: auto;
+    z-index: 10;
 }
 #sidebar h2, #sidebar h3 {
-    color: var(--color-primary); 
+    color: var(--color-primary); 
 }
 
 
-/* AJUSTE RECOMENDADO: Eliminar posición absoluta en #map y usar height: 100% */
-#map { 
-    /* Eliminamos position: absolute; para simplificar la herencia de tamaño */
-    width: 100%;
-    height: 100%; /* ¡CRÍTICO! Asegura que herede la altura de #map-container */
-    /* top: 0; y bottom: 0; ya no son necesarios */
+#map { 
+    width: 100%;
+    height: 100%; 
 }
 
-/* Además, asegúrate que #map-container SÍ tenga position: relative; (ya lo tiene en tu código) */
 #map-container {
-    flex-grow: 1; 
-    position: relative; /* Base para la posición absoluta de popups internos de mapbox */
-    height: 100%; 
+    flex-grow: 1; 
+    position: relative; 
+    height: 100%; 
 }
+
 /* Estilos de leyenda (se mantienen los anteriores) */
 .legend { position: static; margin-top: 15px; background: none; padding: 0; box-shadow: none; max-width: none; }
 .legend .row { display:flex; align-items:center; margin-bottom:12px; }
@@ -248,103 +259,103 @@ h1, h2, h3 {
 
 /* 1. Ocultar el checkbox nativo */
 .legend input[type="checkbox"] {
-    display: none;
+    display: none;
 }
 
 /* 2. Estilo base de la etiqueta (Label) - La 'Píldora' inactiva */
 .legend label {
-    flex: 1;
-    user-select: none;
-    cursor: pointer;
-    font-weight: 500;
-    
-    /* Diseño de la Píldora */
-    background-color: #f0f0f0; /* Fondo inactivo gris claro */
-    color: var(--color-text); /* Texto oscuro por defecto */
-    padding: 8px 15px;
-    border-radius: 20px; /* Bordes redondeados */
-    margin: 5px 0; /* Espacio vertical */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    text-align: center;
+    flex: 1;
+    user-select: none;
+    cursor: pointer;
+    font-weight: 500;
+    
+    /* Diseño de la Píldora */
+    background-color: #f0f0f0; 
+    color: var(--color-text); 
+    padding: 8px 15px;
+    border-radius: 20px; 
+    margin: 5px 0; 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-align: center;
 }
 
 /* 3. Estilo de la etiqueta cuando está ACTIVA (checkbox marcado) */
 /* Usamos el selector de adyacencia '+' para detectar el estado del input */
 .legend input[type="checkbox"]:checked + label {
-    /* Color de fondo: Usamos el color de acento o un color llamativo */
-    background-color: var(--color-primary); /* Fondo Azul Profundo (para contraste) */
-    color: var(--color-light); /* Texto blanco */
-    box-shadow: var(--shadow-heavy);
-    transform: translateY(-2px);
+    /* Color de fondo: Usamos el color de acento o un color llamativo */
+    background-color: var(--color-primary); 
+    color: var(--color-light); 
+    box-shadow: var(--shadow-heavy);
+    transform: translateY(-2px);
 }
 
 /* 4. Opcional: Estilo del pequeño cuadrado de color */
 /* Mantenemos el swatch, pero lo ajustamos al nuevo diseño */
 .legend .swatch {
-    width: 12px; 
-    height: 12px; 
-    border-radius: 50%; /* Lo hacemos redondo */
-    margin-right: 10px; 
-    border: 1px solid #FFF; /* Borde blanco para que se vea sobre el fondo azul */
-    transition: all 0.3s ease;
+    width: 12px; 
+    height: 12px; 
+    border-radius: 50%; 
+    margin-right: 10px; 
+    border: 1px solid #FFF; 
+    transition: all 0.3s ease;
 }
 
 /* Aseguramos que la fila tenga el estilo de pila */
 .legend .row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-    padding: 5px 0; /* Un poco de padding */
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 5px 0; 
 }
 
 /* Hacemos que el swatch cambie a blanco cuando el botón está activo */
 .legend input[type="checkbox"]:checked + label + .swatch {
-    border-color: var(--color-accent);
+    border-color: var(--color-accent);
 }
 
 /* ================================== */
 /* 6. SECCIONES DE CONTENIDO / DASHBOARD AREA */
 /* ================================== */
 #datos-historicos, #impacto-ambiental, #reconstruccion, #galeria, #conclusiones {
-    scroll-margin-top: 70px;
+    scroll-margin-top: 70px;
 }
 
 /* Regla crítica para datos: Asegura la altura dinámica del reporte de Power BI */
 #datos-historicos {
-    min-height: auto !important;
-    height: auto !important;
+    min-height: auto !important;
+    height: auto !important;
 }
 
 .data-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));  
-    gap: 30px;
-    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));  
+    gap: 30px;
+    margin-top: 20px;
 }
 
 /* AJUSTE DE COLOR EN TARJETAS PARA EL FONDO OSCURO */
 .data-card {
-    padding: 25px;
-    border-radius: 12px;
-    background-color: var(--color-light); /* Fondo de tarjeta blanco */
-    color: #333; /* Texto oscuro dentro de la tarjeta */
-    box-shadow: var(--shadow-light);
-    border-left: 5px solid var(--color-accent); 
-    transition: transform 0.2s;
+    padding: 25px;
+    border-radius: 12px;
+    background-color: var(--color-light); 
+    color: #333; 
+    box-shadow: var(--shadow-light);
+    border-left: 5px solid var(--color-accent); 
+    transition: transform 0.2s;
 }
 /* Aseguramos que los títulos dentro de las tarjetas sean oscuros (Azul Primario) */
 .data-card h2, .data-card h3 {
-    color: var(--color-primary); 
+    color: var(--color-primary); 
 }
 .data-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-heavy);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-heavy);
 }
 
 /* Contenedores de datos que deben ser transparentes (sin cambios) */
 .data-section-container {
-    background-color: transparent; 
+    background-color: transparent; 
 }
 
 /* Estilo para las TABLAS de datos generadas por JS */
@@ -354,9 +365,9 @@ h1, h2, h3 {
 .data-table tr,
 .data-table td,
 .data-table th {
-    background-color: var(--color-light); 
-    color: #333; 
-    border-color: rgba(0, 0, 0, 0.2); 
+    background-color: var(--color-light); 
+    color: #333; 
+    border-color: rgba(0, 0, 0, 0.2); 
 }
 
 /* ================================== */
@@ -365,115 +376,110 @@ h1, h2, h3 {
 
 /* Contenedor para la inserción de Power BI */
 .powerbi-container {
-    position: relative; 
-    width: 100%;
-    padding-bottom: 75%; 
-    height: 0; 
-    overflow: hidden; 
-    margin-top: 20px;
-    box-shadow: var(--shadow-heavy); 
-    border-radius: 8px; 
-    background-color: var(--color-light); 
+    position: relative; 
+    width: 100%;
+    padding-bottom: 75%; 
+    height: 0; 
+    overflow: hidden; 
+    margin-top: 20px;
+    box-shadow: var(--shadow-heavy); 
+    border-radius: 8px; 
+    background-color: var(--color-light); 
 }
 
 /* El Iframe ocupa el 100% del contenedor responsive */
 .powerbi-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 
-/* Galería de Fotos y Videos (sin cambios) */
+/* Galería de Fotos y Videos */
 .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px; 
-    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px; 
+    margin-top: 40px;
 }
 
-/* Aplica los estilos de tamaño y diseño tanto a IMG como a VIDEO (sin cambios) */
+/* Aplica los estilos de tamaño y diseño tanto a IMG como a VIDEO */
 .gallery-grid img,
 .gallery-grid video {
-    width: 100%; 
-    height: 300px; 
-    object-fit: cover; 
-    border-radius: 8px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    transition: transform 0.3s ease; 
+    width: 100%; 
+    height: 300px; 
+    object-fit: cover; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.3s ease; 
 }
 
 /* CORRECCIÓN DE COLOR DE TEXTO EN POPUP DE MAPBOX */
 .mapboxgl-popup-content * {
-    color: #000000 !important; 
+    color: #000000 !important; 
 }
 
 /* ================================== */
 /* 7. RESPONSIVE (AJUSTE DEL MENÚ MÓVIL) - CORREGIDO */
 /* ================================== */
 @media (max-width: 900px) {
-    #navbar { 
-        height: 60px; 
-        padding: 0 20px;
-    }
+    #navbar { 
+        height: 60px; 
+        padding: 0 20px;
+    }
 
-    .menu-toggle {
-        display: block; 
-        background: none;
-        border: none;
-        color: var(--color-light); 
-        font-size: 1.8rem;
-        cursor: pointer;
-        z-index: 1001; 
-    }
+    .menu-toggle {
+        display: block; 
+        background: none;
+        border: none;
+        color: var(--color-light); 
+        font-size: 1.8rem;
+        cursor: pointer;
+        z-index: 1001; 
+    }
 
-    #navbar nav { 
-        display: none; 
-        position: absolute;
-        top: 60px; 
-        left: 0;
-        width: 100%;
-        background-color: var(--color-primary); 
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-    }
-    
-    #navbar nav ul {
-        flex-direction: column; 
-        padding: 20px 0;
-        align-items: flex-start;
-    }
-    
-    #navbar nav ul li {
-        margin: 0;
-        text-align: left;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
-        width: 100%;
-    }
-    
-    #navbar nav ul li a {
-        display: block;
-        padding: 15px 20px;
-    }
+    #navbar nav { 
+        display: none; 
+        position: absolute;
+        top: 60px; 
+        left: 0;
+        width: 100%;
+        background-color: var(--color-primary); 
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    }
+    
+    #navbar nav ul {
+        flex-direction: column; 
+        padding: 20px 0;
+        align-items: flex-start;
+    }
+    
+    #navbar nav ul li {
+        margin: 0;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+        width: 100%;
+    }
+    
+    #navbar nav ul li a {
+        display: block;
+        padding: 15px 20px;
+    }
 
-    .nav-open {
-        display: block !important; 
-    }
+    .nav-open {
+        display: block !important; 
+    }
 
 
-    .section { 
-        padding: 80px 5% 40px 5%; 
-    }
-    
-    /* 🛑 REGLAS DE MAPA ELIMINADAS DE AQUÍ PARA EVITAR CONFLICTOS 🛑
-       Las reglas de #mapa-interactivo, #sidebar y #map-container
-       se moverán y ajustarán SOLAMENTE en el bloque de 768px.
-    */
-    
-    #home h1 { 
-        font-size: 2.2rem; 
-    }
+    .section { 
+        padding: 80px 5% 40px 5%; 
+    }
+    
+    #home h1 { 
+        font-size: 2.2rem; 
+    }
 }
 /* ======================================================= */
 /* ESTILOS ESPECÍFICOS PARA DISPOSITIVOS MÓVILES Y LEYENDA */
@@ -481,91 +487,81 @@ h1, h2, h3 {
 
 /* 1. Botón de control de Leyenda (Hamburguesa) - AJUSTE FINAL DE POSICIÓN */
 #legend-toggle-btn {
-    position: absolute;
-    
-    /* 🛑 CAMBIO CLAVE: Posicionar arriba y a la izquierda */
-    top: 15px !important;    /* Distancia desde el borde superior */
-    left: 15px !important;   /* Distancia desde el borde izquierdo */
-    right: auto !important;  /* Asegurarse de que no esté anclado a la derecha */
-    bottom: auto !important; /* Asegurarse de que no esté anclado abajo */
+    position: absolute;
+    
+    /* ✅ POSICIÓN SUPERIOR IZQUIERDA */
+    top: 15px !important;    
+    left: 15px !important;   
+    right: auto !important;  
+    bottom: auto !important; 
 
-    z-index: 1000;
-    padding: 10px 15px;
-    font-size: 16px;
-    background-color: var(--color-primary, #007bff); 
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    
-    display: none !important; /* Mantener oculto en escritorio */
+    z-index: 1000;
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: var(--color-primary, #007bff); 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    
+    display: none !important; /* Mantener oculto en escritorio */
 }
 
 /* 2. Media Query para Móviles - CORRECCIÓN DEFINITIVA */
 @media (max-width: 768px) {
-    
-    /* 🛑 CAMBIA el LAYOUT GENERAL del mapa para móvil */
-    #mapa-interactivo {
-        display: block; 
-        height: calc(100vh - 60px);
-        margin-top: 60px;
-        /* 🛑 CRÍTICO: Aseguramos el padre para la posición absoluta */
-        position: relative !important; 
-    }
+    
+    /* 🛑 CAMBIA el LAYOUT GENERAL del mapa para móvil */
+    #mapa-interactivo {
+        display: block; 
+        height: calc(100vh - 60px);
+        margin-top: 60px;
+        /* 🛑 CRÍTICO: Aseguramos el padre para la posición absoluta */
+        position: relative !important; 
+    }
 
-    /* Mostrar el botón de la leyenda y reubicarlo */
-    #legend-toggle-btn {
-        /* 🛑 CRÍTICO: Forzar visibilidad en móvil */
-        display: block !important; 
-        z-index: 1001; 
-        top: 15px !important;    /* Distancia desde el borde superior */
-        left: 15px !important;   /* Distancia desde el borde izquierdo */
-        right: auto !important;  /* Asegurarse de que no esté anclado a la derecha */
-        bottom: auto !important; /* Asegurarse de que no esté anclado abajo */
-    }
-    
-    /* 🛑 REGLA CRÍTICA: Ocultar y posicionar la barra lateral (SIDEBAR) */
-    #sidebar {
-        /* 🛑 CRÍTICO: Forzar posición absoluta */
-        position: absolute !important; 
-        top: 0;
-        left: 0;
-        
-        height: 100%;
-        width: 300px;
-        max-width: 80%;
-        
-        background-color: var(--color-light); 
-        z-index: 999;
-        
-        /* 🛑 CRÍTICO: OCULTAR FUERA DE LA PANTALLA INICIALMENTE */
-        transform: translateX(-100%) !important; 
-        transition: transform 0.3s ease-in-out;
-        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5);
-        overflow-y: auto;
-    }
+    /* Mostrar el botón de la leyenda y reubicarlo */
+    #legend-toggle-btn {
+        /* 🛑 CRÍTICO: Forzar visibilidad en móvil */
+        display: block !important; 
+        z-index: 1001; 
+        top: 15px !important;    /* Distancia desde el borde superior */
+        left: 15px !important;   /* Distancia desde el borde izquierdo */
+        right: auto !important;  /* Asegurarse de que no esté anclado a la derecha */
+        bottom: auto !important; /* Asegurarse de que no esté anclado abajo */
+    }
+    
+    /* 🛑 REGLA CRÍTICA: Ocultar y posicionar la barra lateral (SIDEBAR) */
+    #sidebar {
+        /* 🛑 CRÍTICO: Forzar posición absoluta */
+        position: absolute !important; 
+        top: 0;
+        left: 0;
+        
+        height: 100%;
+        width: 300px;
+        max-width: 80%; /* CLAVE: Para que no desborde en pantallas muy pequeñas */
+        
+        background-color: var(--color-light); 
+        z-index: 999;
+        
+        /* 🛑 CRÍTICO: OCULTAR FUERA DE LA PANTALLA INICIALMENTE */
+        transform: translateX(-100%) !important; 
+        transition: transform 0.3s ease-in-out;
+        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5);
+        overflow-y: auto;
+    }
 
-    /* Estado ACTIVO: la barra lateral se mueve a la vista */
-    #sidebar.open {
-        /* 🛑 CRÍTICO: Forzar la apertura */
-        transform: translateX(0) !important; 
-    }
-    
-    /* Asegura que el mapa ocupe todo el espacio */
-    #map-container {
-        width: 100%;
-        height: 100%; 
-        position: relative;
-    }
+    /* Estado ACTIVO: la barra lateral se mueve a la vista */
+    #sidebar.open {
+        /* 🛑 CRÍTICO: Forzar la apertura */
+        transform: translateX(0) !important; 
+    }
+    
+    /* Asegura que el mapa ocupe todo el espacio */
+    #map-container {
+        width: 100%;
+        height: 100%; 
+        position: relative;
+    }
 }
-
-
-
-
-
-
-
-
-
-
