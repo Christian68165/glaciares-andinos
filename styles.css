@@ -479,11 +479,16 @@ h1, h2, h3 {
 /* ESTILOS ESPECÍFICOS PARA DISPOSITIVOS MÓVILES Y LEYENDA */
 /* ======================================================= */
 
-/* 1. Botón de control de Leyenda (Hamburguesa) - AJUSTE Z-INDEX - CORREGIDO */
+/* 1. Botón de control de Leyenda (Hamburguesa) - AJUSTE FINAL DE POSICIÓN */
 #legend-toggle-btn {
     position: absolute;
-    top: 15px; /* Propiedad de escritorio/base */
-    left: 15px; /* Propiedad de escritorio/base */
+    
+    /* 🛑 CAMBIO CLAVE: Posicionar arriba y a la izquierda */
+    top: 15px !important;    /* Distancia desde el borde superior */
+    left: 15px !important;   /* Distancia desde el borde izquierdo */
+    right: auto !important;  /* Asegurarse de que no esté anclado a la derecha */
+    bottom: auto !important; /* Asegurarse de que no esté anclado abajo */
+
     z-index: 1000;
     padding: 10px 15px;
     font-size: 16px;
@@ -494,8 +499,7 @@ h1, h2, h3 {
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     
-    /* 🛑 CORRECCIÓN CLAVE 1: Forzar ocultación en escritorio */
-    display: none !important; 
+    display: none !important; /* Mantener oculto en escritorio */
 }
 
 /* 2. Media Query para Móviles - CORRECCIÓN DEFINITIVA */
@@ -515,10 +519,10 @@ h1, h2, h3 {
         /* 🛑 CRÍTICO: Forzar visibilidad en móvil */
         display: block !important; 
         z-index: 1001; 
-        top: auto; 
-        left: auto; 
-        bottom: 15px; 
-        right: 15px; 
+        top: 15px !important;    /* Distancia desde el borde superior */
+        left: 15px !important;   /* Distancia desde el borde izquierdo */
+        right: auto !important;  /* Asegurarse de que no esté anclado a la derecha */
+        bottom: auto !important; /* Asegurarse de que no esté anclado abajo */
     }
     
     /* 🛑 REGLA CRÍTICA: Ocultar y posicionar la barra lateral (SIDEBAR) */
@@ -555,6 +559,7 @@ h1, h2, h3 {
         position: relative;
     }
 }
+
 
 
 
